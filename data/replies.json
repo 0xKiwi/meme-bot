@@ -1,0 +1,34 @@
+{
+	"bad-command": [
+		"sorry, I don't understand what you're asking.",
+		"I don't recognise that command.",
+		"huh?",
+		"I don't get it",
+		"what exactly are you asking from me?"
+	],
+	"greeting": [
+		"hi",
+		"hello",
+		"hey",
+		"greetings",
+		"howdy",
+		"namaste"
+	],
+	"bad-access-level": [
+		"I'm not doing that!",
+		"no!",
+		"you don't have the right access level.",
+		"you're not my supervisor!",
+		"yeah, no."
+	],
+	"game": [
+		"with your girlfriend",
+		"jenga",
+		"with lego",
+		"nothing",
+		"mashed potato",
+		"french fries",
+		"on {{ servers }} servers",
+		"with {{ users }} users"
+	]
+}

@@ -1,0 +1,21 @@
+[
+	{
+		"version": "1.0.0",
+		"changelog": {
+			"added": [
+				"sound effect commands alive, surprise and haha",
+				"ping command that shows the time the reply took in ms",
+				"join command that makes the bot join the voice channel the user is in",
+				"summon command (alias for join)",
+				"nuke command that removes last n messages",
+				"hi command that greets the user",
+				"play command that plays a song from YouTube",
+				"skip command that goes to the next song in the queue",
+				"pause and resume commands",
+				"volume command",
+				"changelog and changelog command"
+			],
+			"changed": []
+		}
+	}
+]

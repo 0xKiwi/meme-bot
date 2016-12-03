@@ -375,6 +375,24 @@ var commands = {
 		},
 		description: "Plays the sound effect: Surprise motherfucker"
 	},
+	// Show a Ron Swanson quote
+	"swanson": {
+		do: function(bot, msg, args) {
+			var options = {
+				host: "ron-swanson-quotes.herokuapp.com",
+				path: "/v2/quotes"
+			}
+
+			var callback = function(response) {
+				response.on('data', function(chunk) {
+					msg.channel.sendMessage('"*' + JSON.parse(chunk)[0].toString() + '*"\n**~ Ron Swanson**');
+				});
+			};
+
+			var req = http.request(options, callback).end();
+		},
+		description: "Get a Ron Swanson quote"
+	},
 	// Start listening to all channels again
 	"unbind": {
 		do: function(bot, msg, args) {

@@ -455,6 +455,7 @@ function addToQueue(msg, song) {
 	}
 }
 
+// Check if file exists
 function doesFileExist(file) {
 	try {
 		fs.accessSync(file, fs.F_OK);
@@ -465,6 +466,7 @@ function doesFileExist(file) {
 	return true;
 }
 
+// Download TTS mp3
 function downloadTTS(url, dest) {
 	return new Promise(function (resolve, reject) {
 		var info = urlParse(url);
@@ -679,7 +681,7 @@ function tts(text, voiceChannel) {
 	}
 
 	var filename = text.replace(/\s+/g, '-').toLowerCase();
-	var dest = 'tts/' + filename + '.mp3'
+	var dest = 'tts/' + filename + '.mp3';
 
 	if (doesFileExist(dest)) {
 		playFileInVoiceChannel(voiceChannel, dest);
@@ -706,10 +708,12 @@ function updateLastSeen(user) {
 	}
 }
 
+// Do stuff when user joins a voice channel
 function userJoinedVoiceChannel(newMember, voiceChannel) {
 	tts(newMember.user.username + ' joined the channel.', voiceChannel);
 }
 
+// Do stuff when user leaves a voice channel
 function userLeftVoiceChannel(newMember, voiceChannel) {
 	tts(newMember.user.username + ' left the channel.', voiceChannel);
 }

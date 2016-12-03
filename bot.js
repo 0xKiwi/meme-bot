@@ -285,6 +285,17 @@ var commands = {
 		},
 		description: "Show info about a Netflix title"
 	},
+	// Sound effect: I have osteoporosis
+	"osteoporosis": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/osteoporosis.mp3");
+		},
+		description: "Plays the sound effect: I have osteoporosis"
+	},
 	// Pause the current audio stream
 	"pause": {
 		do: function(bot, msg, args) {

@@ -144,7 +144,7 @@ var commands = {
 	"help": {
 		do: function(bot, msg, args) {
 			var text = "Here is a list for commands:\n";
-			text += "Mention **@Potato** followed by a command.";
+			text += "Mention " + bot.user.toString() + " followed by a command.";
 			text += "\n\n";
 			for (var key in commands) {
 				text += "`" + key + "` - **" + commands[key].description + "**\n";

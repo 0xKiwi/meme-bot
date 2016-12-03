@@ -176,7 +176,14 @@ var commands = {
 	// Makes the bot use tts to say something
 	"say": {
 		do: function(bot, msg, args) {
-			msg.channel.sendTTSMessage(args.splice(1, args.length).join(' '));
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return;
+			}
+
+			var text = args.splice(1, args.length).join(' ');
+
+			tts(text, voiceChannel);
 		}
 	},
 	// Last seen

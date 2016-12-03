@@ -71,51 +71,7 @@ var commands = {
 	// Show the changelog
 	"changelog": {
 		do: function(bot, msg, args) {
-			msg.channel.startTyping();
-			var string = "**Changelog:**\n\n";
-			for (var i = 0; i < changelog.length; i++) {
-				try {
-					string += "**v" + changelog[i].version + "**\n";
-
-					if (changelog[i].changelog.added) {
-						var added = changelog[i].changelog.added;
-						for (var j = 0; j < added.length; j++) {
-							string += "* Added " + added[j] + ".\n";
-						}
-						string += "\n";
-					}
-
-					if (changelog[i].changelog.changed) {
-						var changed = changelog[i].changelog.changed;
-						for (var j = 0; j < changed.length; j++) {
-							string += "* Changed " + changed[j] + ".\n";
-						}
-						string += "\n";
-					}
-
-					if (changelog[i].changelog.fixed) {
-						var fixed = changelog[i].changelog.fixed;
-						for (var j = 0; j < fixed.length; j++) {
-							string += "* Fixed " + fixed[j] + ".\n";
-						}
-						string += "\n";
-					}
-
-					if (changelog[i].changelog.removed) {
-						var removed = changelog[i].changelog.removed;
-						for (var j = 0; j < removed.length; j++) {
-							string += "* Removed " + removed[j] + ".\n";
-						}
-					}
-
-				} catch (e) {
-					logMsg("error", e);
-				}
-
-			}
-
-			msg.channel.sendMessage(string);
-			msg.channel.stopTyping(true);
+			msg.reply("unfortunately this command is not yet implemented.");
 		},
 		help: "Shows the changelog"
 	},

@@ -32,6 +32,17 @@ var seen = [];
 
 // Commands
 var commands = {
+	// Sound effect: Smoke weed everyday
+	"420blazeit": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/smoke-weed-everyday.mp3");
+		},
+		description: "Plays the sound effect: Smoke weed everyday"
+	},
 	// Sound effect: IT'S ALIIIIIVE!!!
 	"alive": {
 		do: function(bot, msg, args) {
@@ -75,6 +86,17 @@ var commands = {
 		},
 		description: "Shows the changelog"
 	},
+	// Sound effect: Deez nuts! Ha! Got 'em! Ha!'
+	"deeznuts": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/deez-nuts.mp3");
+		},
+		description: "Plays the sound effect: Deez nuts! Ha! Got em!"
+	},
 	// Sound effect: I have crippling depression
 	"depression": {
 		do: function(bot, msg, args) {
@@ -111,6 +133,17 @@ var commands = {
 		},
 		description: "Greets you"
 	},
+	// Sound effect: My name is jeff
+	"jeff": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/jeff.mp3");
+		},
+		description: "Plays the sound effect: My name is Jeff"
+	},
 	// Joins the voice channel the author is in
 	"join": {
 		do: function(bot, msg, args) {
@@ -128,6 +161,17 @@ var commands = {
 				});
 		},
 		description: "Makes the bot join your voice channel"
+	},
+	// Sound effect: Leeroy Jenkins!
+	"leeroy": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/leeroy-jenkins.mp3");
+		},
+		description: "Plays the sound effect: Leeroy Jenkins!"
 	},
 	// Makes the bot use tts to say something
 	"say": {

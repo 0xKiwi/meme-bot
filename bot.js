@@ -26,6 +26,7 @@ logMsg("info", "Loaded all files");
 var version = "0.1.0";
 const BOT_STATUS_UPDATE_DELAY = 30000;
 const MAX_TTS_LENGTH = 140;
+const EMBED_COLOR = 3447003;
 
 var queues = {};
 var servers = {};
@@ -289,7 +290,7 @@ var commands = {
 					}
 
 					msg.channel.sendMessage("", {embed: {
-						color: 3447003,
+						color: EMBED_COLOR,
 						author: {
 							name: displayTitle,
 							icon_url: movie.poster,
@@ -470,7 +471,7 @@ var commands = {
 					var quote = JSON.parse(chunk)[0].toString();
 
 					msg.channel.sendMessage("", {embed: {
-						color: 3447003,
+						color: EMBED_COLOR,
 						author: {
 							name: "Ron Swanson",
 							icon_url: "http://i.imgur.com/VTMQFUG.png",

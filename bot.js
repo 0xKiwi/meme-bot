@@ -84,20 +84,44 @@ var commands = {
 	// Get a random cat fact
 	"cat": {
 		do: function(bot, msg, args) {
-			var options = {
+			var factOptions = {
 				host: "catfacts-api.appspot.com",
 				path: "/api/facts"
 			}
 
-			var callback = function(response) {
-				response.on('data', function(chunk) {
-					//console.log(JSON.parse(chunk));
-					msg.channel.sendMessage(JSON.parse(chunk).facts[0].toString());
-					msg.channel.sendFile("http://cataas.com/cat?.jpg");
+			var factCallback = function(factResponse) {
+				factResponse.on('data', function(factChunk) {
+					var fact = JSON.parse(factChunk).facts[0].toString();
+					var imageOptions = {
+						host: "random.cat",
+						path: "/meow"
+					}
+
+					var imageCallback = function(imageResponse) {
+						imageResponse.on('data', function(imageChunk) {
+							var image = JSON.parse(imageChunk).file;
+							msg.channel.sendMessage("", {embed: {
+								color: EMBED_COLOR,
+								author: {
+									name: "Cat Facts™",
+									icon_url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/cat-icon.png"
+								},
+								description: fact,
+								thumbnail: {
+									url: image
+								},
+								footer: {
+									text: "meow!"
+								}
+							}});
+						});
+					}
+
+					var imageReq = http.request(imageOptions, imageCallback).end();
 				});
 			};
 
-			var req = http.request(options, callback).end();
+			var factReq = http.request(factOptions, factCallback).end();
 		},
 		description: "Get a random cat fact and picture"
 	},

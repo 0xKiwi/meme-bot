@@ -104,7 +104,8 @@ var commands = {
 								color: EMBED_COLOR,
 								author: {
 									name: "Cat Facts™",
-									icon_url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/cat-icon.png"
+									icon_url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/cat-icon.png",
+									url: image
 								},
 								description: fact,
 								thumbnail: {

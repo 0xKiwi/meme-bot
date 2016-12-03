@@ -16,7 +16,6 @@ logMsg("info", "Loaded all modules");
 
 // Get all files
 var auth = require('./data/auth.json');
-var changelog = require("./data/changelog.json");
 var configs = require("./data/config.json");
 var replies = require("./data/replies.json");
 

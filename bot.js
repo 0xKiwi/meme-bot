@@ -144,7 +144,7 @@ var commands = {
 	// Show help for each command
 	"help": {
 		do: function(bot, msg, args) {
-			msg.reply("unfortunately this command is not yet implemented.");
+			msg.reply("ask here for help: https://discord.gg/E4m8QJh");
 		},
 		help: "Seriously?"
 	},

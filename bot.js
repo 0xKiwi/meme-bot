@@ -278,8 +278,35 @@ var commands = {
 				if (err || !movie) {
 					msg.channel.sendMessage("Something went wrong. (Perhaps the title doesn't exist?)");
 				} else {
-					msg.channel.sendMessage("**" + movie.title + "** `" + movie.imdb.rating + '/10`\n*' + movie.plot + '*');
-					msg.channel.sendFile(movie.poster);
+					var displayTitle = movie.title + " (" + movie.year + ")";
+
+					if (movie.type == "series") {
+						if (movie.year.to != undefined) {
+							displayTitle = movie.title + " (" + movie.year.from + "-" + movie.year.to + ")";
+						} else {
+							displayTitle = movie.title + " (" + movie.year.from + "-)";
+						}
+					}
+
+					msg.channel.sendMessage("", {embed: {
+						color: 3447003,
+						author: {
+							name: displayTitle,
+							icon_url: movie.poster,
+							url: "http://www.imdb.com/title/" + movie.imdb.id
+						},
+						thumbnail: {
+							url: movie.poster
+						},
+						description: movie.plot,
+						fields: [
+							{
+								name: "Rating",
+								value: ":star: " + movie.imdb.rating + "/10",
+								inline: true
+							}
+						]
+					}});
 				}
 			});
 		},

@@ -476,7 +476,7 @@ bot.on("presenceUpdate", function(oldMember, newMember) {
 });
 
 bot.on('voiceStateUpdate', function(oldMember, newMember) {
-	if (newMember.user.id == bot.user.id) {
+	if (newMember.user.id == bot.user.id || newMember.user.bot) {
 		return;
 	}
 

@@ -41,21 +41,21 @@ var commands = {
 			}
 			playFileInVoiceChannel(voiceChannel, "sound/its-alive.mp3");
 		},
-		help: "Plays the sound effect: IT'S ALIIIIIVE!!!"
+		description: "Plays the sound effect: IT'S ALIIIIIVE!!!"
 	},
 	// Only listens to a specific channel
 	"bind": {
 		do: function(bot, msg, args) {
 			msg.reply("unfortunately this command is not yet implemented.");
 		},
-		help: "The bot will only interact with messages in this text channel"
+		description: "The bot will only interact with messages in this text channel"
 	},
 	// Block a user
 	"block": {
 		do: function(bot, msg, args) {
 			msg.reply("unfortunately this command is not yet implemented.");
 		},
-		help: "Block a user from executing commands"
+		description: "Block a user from executing commands"
 	},
 	// Sound effect: Brutal, savage, rekt
 	"bsr": {
@@ -66,14 +66,14 @@ var commands = {
 			}
 			playFileInVoiceChannel(voiceChannel, "sound/brutal-savage-rekt.mp3");
 		},
-		help: "Plays the sound effect: Brutal, savage, rekt"
+		description: "Plays the sound effect: Brutal, savage, rekt"
 	},
 	// Show the changelog
 	"changelog": {
 		do: function(bot, msg, args) {
 			msg.reply("unfortunately this command is not yet implemented.");
 		},
-		help: "Shows the changelog"
+		description: "Shows the changelog"
 	},
 	// Sound effect: I have crippling depression
 	"depression": {
@@ -84,7 +84,7 @@ var commands = {
 			}
 			playFileInVoiceChannel(voiceChannel, "sound/crippling-depression.mp3");
 		},
-		help: "Plays the sound effect: I have crippling depression"
+		description: "Plays the sound effect: I have crippling depression"
 	},
 	// Sound effect: Haha!
 	"haha": {
@@ -95,21 +95,21 @@ var commands = {
 			}
 			playFileInVoiceChannel(voiceChannel, "sound/nelson-haha.mp3");
 		},
-		help: "Plays the sound effect: Haha!"
+		description: "Plays the sound effect: Haha!"
 	},
 	// Show help for each command
 	"help": {
 		do: function(bot, msg, args) {
 			msg.reply("ask here for help: https://discord.gg/E4m8QJh");
 		},
-		help: "Seriously?"
+		description: "Seriously?"
 	},
 	// Greets the author
 	"hi": {
 		do: function(bot, msg, args) {
 			msg.channel.sendMessage(getReply("greeting").capitalizeFirstLetter() + ", " + msg.author);
 		},
-		help: "Greets you"
+		description: "Greets you"
 	},
 	// Joins the voice channel the author is in
 	"join": {
@@ -126,7 +126,8 @@ var commands = {
 				.catch(err => {
 					msg.reply("I couldn't join the channel.");
 				});
-		}
+		},
+		description: "Makes the bot join your voice channel"
 	},
 	// Makes the bot use tts to say something
 	"say": {
@@ -139,7 +140,8 @@ var commands = {
 			var text = args.splice(1, args.length).join(' ');
 
 			tts(text, voiceChannel);
-		}
+		},
+		description: "Will join the voice channel you are in"
 	},
 	// Last seen
 	"seen": {
@@ -153,14 +155,16 @@ var commands = {
 			} else {
 				msg.reply("they were last seen on " + seen[user.id]);
 			}
-		}
+		},
+		description: "Shows when a user was last seen"
 	},
 	// Leaves the voice channel
 	"leave": {
 		do: function(bot, msg, args) {
 			msg.channel.guild.voiceConnection.disconnect();
 			msg.delete(3000);
-		}
+		},
+		description: "Leaves a voice channel"
 	},
 	// Is only a game, why you heff to be mad
 	"mad": {
@@ -170,15 +174,17 @@ var commands = {
 				return msg.reply("you must be in a voice channel first.");
 			}
 			playFileInVoiceChannel(voiceChannel, "sound/mad.mp3");
-		}
+		},
+		description: "Plays the sound effect: Id only a game. Why you heff to be mad"
 	},
 	// Nuke a specified amount of messages
 	"nuke": {
 		do: function(bot, msg, args) {
-				let messagecount = parseInt(args[1]) + 1;
-				msg.channel.fetchMessages({limit: messagecount})
-					.then(msgs => msg.channel.bulkDelete(msgs));
-			}
+			let messagecount = parseInt(args[1]) + 1;
+			msg.channel.fetchMessages({limit: messagecount})
+				.then(msgs => msg.channel.bulkDelete(msgs));
+		},
+		description: "Remove messages in bulk"
 	},
 	// Bruce says oh no!
 	"ohno": {
@@ -188,14 +194,16 @@ var commands = {
 				return msg.reply("you must be in a voice channel first.");
 			}
 			playFileInVoiceChannel(voiceChannel, "sound/ohno.mp3");
-		}
+		},
+		description: "Plays the sound effect: Oh no!"
 	},
 	// Pause the current audio stream
 	"pause": {
 		do: function(bot, msg, args) {
 			pauseMusic(msg);
 			msg.delete(3000);
-		}
+		},
+		description: "Pause music playback"
 	},
 	// Pong!
 	"ping": {
@@ -206,7 +214,8 @@ var commands = {
 					var endTime = now();
 					return msg.edit('Pong! Took ' + (endTime - startTime).toFixed(0) + ' ms.');
 				}).catch(console.error);
-		}
+		},
+		description: "Pong!"
 	},
 	// Plays a song from YouTube
 	"play": {
@@ -242,7 +251,8 @@ var commands = {
 					}
 				});
 			}
-		}
+		},
+		description: "Play a YouTube song"
 	},
 	// Wacth your profamity
 	"profamity": {
@@ -252,7 +262,8 @@ var commands = {
 				return msg.reply("you must be in a voice channel first.");
 			}
 			playFileInVoiceChannel(voiceChannel, "sound/profamity.mp3");
-		}
+		},
+		description: "Plays the sound effect: Watch yo profamity"
 	},
 	// Shows the current queue
 	"queue": {
@@ -265,21 +276,24 @@ var commands = {
 				.catch(e => {
 					console.log(e);
 				});
-		}
+		},
+		description: "Show the queue"
 	},
 	// Resume the current audio stream
 	"resume" : {
 		do: function(bot, msg, args) {
 			resumeMusic(msg);
 			msg.delete(3000);
-		}
+		},
+		description: "Resume playing music"
 	},
 	// Skip the curretn song
 	"skip": {
 		do: function(bot, msg, args) {
 			playNextInQueue(msg);
 			msg.delete(3000);
-		}
+		},
+		description: "Skip the current song"
 	},
 	// Allows the user to set a timer.
 	// Takes the first argument as a time in seconds
@@ -296,13 +310,15 @@ var commands = {
 			setTimeout(function () {
 				msg.channel.sendTTSMessage(msg.author.toString() + ", your timer is done!");
 			}, time * 1000);
-		}
+		},
+		description: "Set a timer"
 	},
 	// Alias for join
 	"summon": {
 		do: function(bot, msg, args) {
 			commands["join"].do(bot, msg, args);
-		}
+		},
+		description: "Alias for join"
 	},
 	// Sound effect: Surprise motherfucka
 	"surprise": {
@@ -312,13 +328,15 @@ var commands = {
 				return msg.reply("you must be in a voice channel first.");
 			}
 			playFileInVoiceChannel(voiceChannel, "sound/surprise-motherfucker.mp3");
-		}
+		},
+		description: "Plays the sound effect: Surprise motherfucker"
 	},
 	// Start listening to all channels again
 	"unbind": {
 		do: function(bot, msg, args) {
 			msg.reply("unfortunately this command is not yet implemented.");
-		}
+		},
+		description: "Unbind the bot from any channel"
 	},
 	// Adjust the volume
 	"volume": {
@@ -328,7 +346,8 @@ var commands = {
 				setVolume(msg, volume);
 				msg.delete(3000);
 			}
-		}
+		},
+		description: "Set the volume"
 	}
 };
 

@@ -446,6 +446,11 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 	}
 
 	var voiceChannel = newMember.voiceChannel;
+
+	if (voiceChannel.userLimit != 0) {
+		return;
+	}
+
 	if (!voiceChannel || newMember.voiceChannelID == newMember.guild.afkChannelID) {
 		userLeftVoiceChannel(newMember, oldMember.voiceChannel);
 	} else {

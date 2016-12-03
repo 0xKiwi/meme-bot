@@ -1,1 +1,2 @@
-potato-bot
+#Potato Bot
+A multi-functional discord bot

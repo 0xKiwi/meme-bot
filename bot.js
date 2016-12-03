@@ -80,6 +80,26 @@ var commands = {
 		},
 		description: "Plays the sound effect: Brutal, savage, rekt"
 	},
+	// Get a random cat fact
+	"cat": {
+		do: function(bot, msg, args) {
+			var options = {
+				host: "catfacts-api.appspot.com",
+				path: "/api/facts"
+			}
+
+			var callback = function(response) {
+				response.on('data', function(chunk) {
+					//console.log(JSON.parse(chunk));
+					msg.channel.sendMessage(JSON.parse(chunk).facts[0].toString());
+					msg.channel.sendFile("http://cataas.com/cat?.jpg");
+				});
+			};
+
+			var req = http.request(options, callback).end();
+		},
+		description: "Get a random cat fact and picture"
+	},
 	// Show the changelog
 	"changelog": {
 		do: function(bot, msg, args) {

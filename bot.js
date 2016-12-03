@@ -67,7 +67,7 @@ var commands = {
 		do: function(bot, msg, args) {
 			msg.reply("unfortunately this command is not yet implemented.");
 		},
-		description: "Block a user from executing commands"
+		description: "Block a user from executing a command"
 	},
 	// Sound effect: Brutal, savage, rekt
 	"bsr": {
@@ -440,7 +440,17 @@ var commands = {
 
 			var callback = function(response) {
 				response.on('data', function(chunk) {
-					msg.channel.sendMessage('"*' + JSON.parse(chunk)[0].toString() + '*"\n**~ Ron Swanson**');
+					var quote = JSON.parse(chunk)[0].toString();
+
+					msg.channel.sendMessage("", {embed: {
+						color: 3447003,
+						author: {
+							name: "Ron Swanson",
+							icon_url: "http://i.imgur.com/VTMQFUG.png",
+							url: "https://en.wikipedia.org/wiki/Ron_Swanson"
+						},
+						description: quote
+					}});
 				});
 			};
 
@@ -475,6 +485,7 @@ youtube.setKey(auth.api.youtube);
 
 bot.on("ready", function() {
 	logMsg("info", "Started " + bot.user.username + " v" + version);
+
 	setInterval(function() {
 		var game = getReply("game");
 		if (game.indexOf("{{ servers }}") > -1) {
@@ -607,7 +618,7 @@ function getOnlineUsersCount() {
 	for (var i = 0; i < guilds.length; i++) {
 		var members = guilds[i].members.array();
 		for (var j = 0; j < members.length; j++) {
-			if (members[j].user.status == "online" && !members[j].user.bot) {
+			if (members[j].user.presence.status == "online" && !members[j].user.bot) {
 				amount++;
 			}
 		}
@@ -816,3 +827,7 @@ String.prototype.capitalizeFirstLetter = function() {
 }
 
 bot.login(auth.api.discord);
+
+process.on("unhandledRejection", err => {
+	console.error("Uncaught Promise Error: \n" + err.stack);
+});

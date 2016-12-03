@@ -14,6 +14,7 @@
     "discord.js": "^10.0.1",
     "google-tts-api": "0.0.1",
     "node-opus": "^0.2.2",
+    "omdb": "^0.7.0",
     "opusscript": "0.0.1"
   }
 }

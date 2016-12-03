@@ -10,6 +10,7 @@ const now = require("performance-now");
 const YouTube = require('youtube-node');
 const ytdl = require("ytdl-core");
 const googleTTS = require('google-tts-api');
+const omdb = require('omdb');
 require("write-file-atomic");
 
 logMsg("info", "Loaded all modules");
@@ -220,6 +221,22 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/mad.mp3");
 		},
 		description: "Plays the sound effect: Id only a game. Why you heff to be mad"
+	},
+	// Show info about a Netflix title
+	"movie": {
+		do: function(bot, msg, args) {
+			var title = args.splice(1, args.length).join('+');
+
+			omdb.get(title, true, function(err, movie) {
+				if (err || !movie) {
+					msg.channel.sendMessage("Something went wrong. (Perhaps the title doesn't exist?)");
+				}
+
+				msg.channel.sendMessage("**" + movie.title + "** (" + movie.year + ")\n`" + movie.imdb.rating + '/10`\n*' + movie.plot + '*');
+				msg.channel.sendFile(movie.poster);
+			});
+		},
+		description: "Show info about a Netflix title"
 	},
 	// Nuke a specified amount of messages
 	"nuke": {

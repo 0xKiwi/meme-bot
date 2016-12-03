@@ -251,7 +251,7 @@ var commands = {
 				if (err || !movie) {
 					msg.channel.sendMessage("Something went wrong. (Perhaps the title doesn't exist?)");
 				} else {
-					msg.channel.sendMessage("**" + movie.title + "**\n`" + movie.imdb.rating + '/10`\n*' + movie.plot + '*');
+					msg.channel.sendMessage("**" + movie.title + "** `" + movie.imdb.rating + '/10`\n*' + movie.plot + '*');
 					msg.channel.sendFile(movie.poster);
 				}
 			});

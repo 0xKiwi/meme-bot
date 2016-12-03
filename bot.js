@@ -511,6 +511,11 @@ function getOnlineUsersCount() {
 			}
 		}
 	}
+
+	if (amount <= 1) {
+		amount = "a couple";
+	}
+
 	return amount;
 }
 

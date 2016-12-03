@@ -222,22 +222,6 @@ var commands = {
 		},
 		description: "Plays the sound effect: Id only a game. Why you heff to be mad"
 	},
-	// Show info about a Netflix title
-	"movie": {
-		do: function(bot, msg, args) {
-			var title = args.splice(1, args.length).join('+');
-
-			omdb.get(title, true, function(err, movie) {
-				if (err || !movie) {
-					msg.channel.sendMessage("Something went wrong. (Perhaps the title doesn't exist?)");
-				}
-
-				msg.channel.sendMessage("**" + movie.title + "** (" + movie.year + ")\n`" + movie.imdb.rating + '/10`\n*' + movie.plot + '*');
-				msg.channel.sendFile(movie.poster);
-			});
-		},
-		description: "Show info about a Netflix title"
-	},
 	// Nuke a specified amount of messages
 	"nuke": {
 		do: function(bot, msg, args) {
@@ -257,6 +241,22 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/ohno.mp3");
 		},
 		description: "Plays the sound effect: Oh no!"
+	},
+	// Show info about a Netflix title
+	"omdb": {
+		do: function(bot, msg, args) {
+			var title = args.splice(1, args.length).join('+');
+
+			omdb.get(title, true, function(err, movie) {
+				if (err || !movie) {
+					msg.channel.sendMessage("Something went wrong. (Perhaps the title doesn't exist?)");
+				} else {
+					msg.channel.sendMessage("**" + movie.title + "**\n`" + movie.imdb.rating + '/10`\n*' + movie.plot + '*');
+					msg.channel.sendFile(movie.poster);
+				}
+			});
+		},
+		description: "Show info about a Netflix title"
 	},
 	// Pause the current audio stream
 	"pause": {

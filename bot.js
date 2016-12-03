@@ -143,7 +143,14 @@ var commands = {
 	// Show help for each command
 	"help": {
 		do: function(bot, msg, args) {
-			msg.reply("ask here for help: https://discord.gg/E4m8QJh");
+			var text = "Here is a list for commands:\n";
+			text += "Mention **@Potato** followed by a command.";
+			text += "\n\n";
+			for (var key in commands) {
+				text += "`" + key + "` - **" + commands[key].description + "**\n";
+			}
+
+			msg.channel.sendMessage(text);
 		},
 		description: "Seriously?"
 	},

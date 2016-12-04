@@ -15,11 +15,7 @@
 		"namaste"
 	],
 	"bad-access-level": [
-		"I'm not doing that!",
-		"no!",
-		"you don't have the right access level.",
-		"you're not my supervisor!",
-		"yeah, no."
+		"you're not my supervisor!"
 	],
 	"game": [
 		"jenga",

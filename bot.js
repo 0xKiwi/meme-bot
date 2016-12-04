@@ -475,7 +475,7 @@ var commands = {
 
 			fields.push({
 				name: "Discriminator",
-				value: user.discriminator,
+				value: "#" + user.discriminator,
 				inline: true
 			});
 

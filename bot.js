@@ -56,7 +56,8 @@ var commands = {
 					url: "https://discordapp.com/oauth2/authorize?&client_id=233636104132231168&scope=bot"
 				}
 			}});
-		}
+		},
+		description: "Show a link so you can add the bot to your own server"
 	},
 	// Sound effect: IT'S ALIIIIIVE!!!
 	"alive": {
@@ -407,7 +408,7 @@ var commands = {
 				}
 			});
 		},
-		description: "Show info about a Netflix title"
+		description: "Show info about a movie or series"
 	},
 	// Sound effect: I have osteoporosis
 	"osteoporosis": {

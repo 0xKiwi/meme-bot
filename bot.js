@@ -433,6 +433,77 @@ var commands = {
 		},
 		description: "Show the queue"
 	},
+	// Show info about a user
+	"user": {
+		do: function(bot, msg, args) {
+			msg.channel.startTyping()
+			var user = msg.mentions.users.array()[1];
+			var member = msg.guild.member(bot.users.get(user.id));
+			updateLastSeen(user);
+
+			var fields = [];
+
+			fields.push({
+				name: "ID",
+				value: user.id,
+			});
+
+			fields.push({
+				name: "Joined Discord",
+				value: user.createdAt.toLocaleString(),
+				inline: true
+			});
+
+			if (seen[user.id] != null && seen[user.id] != "") {
+				fields.push({
+					name: "Last seen",
+					value: seen[user.id],
+					inline: true
+				});
+			}
+
+			var roles = member.roles.array();
+			var rolesString = "";
+
+			for (var i = 0; i < roles.length; i++) {
+				var r = roles[i].name.toString();
+				if (r.slice(0, 1) == "@") {
+					r = r.slice(1, r.length);
+				}
+				rolesString += r + ", ";
+			}
+
+			fields.push({
+				name: "Roles",
+				value: rolesString.slice(0, -2)
+			});
+
+			if (user.presence.game) {
+				fields.push({
+					name: "Playing",
+					value: user.presence.game.name
+				});
+			}
+
+
+			msg.channel.sendMessage("", {embed: {
+				color: EMBED_COLOR,
+				author: {
+					name: user.username,
+					icon_url: user.avatarURL
+				},
+				thumbnail: {
+					url: user.avatarURL
+				},
+				fields: fields
+			}})
+			.then(function() {
+				msg.channel.stopTyping();
+			});
+			msg.channel.stopTyping();
+		},
+		description: "Show info about a user"
+	},
 	// Resume the current audio stream
 	"resume" : {
 		do: function(bot, msg, args) {

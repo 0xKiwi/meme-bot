@@ -275,21 +275,6 @@ var commands = {
 		},
 		description: "Will join the voice channel you are in"
 	},
-	// Last seen
-	"seen": {
-		do: function(bot, msg, args) {
-			var user = msg.mentions.users.array()[1];
-
-			updateLastSeen(user);
-
-			if (seen[user.id] == null || seen[user.id] == "") {
-				msg.reply("I've never seen that user.");
-			} else {
-				msg.reply("they were last seen on " + seen[user.id]);
-			}
-		},
-		description: "Shows when a user was last seen"
-	},
 	// Leaves the voice channel
 	"leave": {
 		do: function(bot, msg, args) {

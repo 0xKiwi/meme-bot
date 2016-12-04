@@ -334,6 +334,17 @@ var commands = {
 		},
 		description: "Plays the sound effect: Make america great again"
 	},
+	// Sound effect: nein
+	"nein": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/nein.mp3");
+		},
+		description: "Plays the sound effect: nein"
+	},
 	// Nuke a specified amount of messages
 	"nuke": {
 		do: function(bot, msg, args) {

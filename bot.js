@@ -216,7 +216,8 @@ var commands = {
 					text: (endTime - startTime).toFixed(0) + " ms"
 				}
 			}});
-		}
+		},
+		description: "If you're reading this, it's not for you"
 	},
 	// Sound effect: Haha!
 	"haha": {

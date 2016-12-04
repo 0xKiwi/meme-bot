@@ -240,7 +240,7 @@ var commands = {
 				text += "`" + key + "` - **" + commands[key].description + "**\n";
 			}
 
-			msg.channel.sendMessage(text);
+			msg.channel.sendMessage(text, {split:true}).catch(console.error);
 		},
 		description: "Seriously?"
 	},

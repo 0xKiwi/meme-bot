@@ -199,6 +199,7 @@ var commands = {
 			var startTime = now();
 			if (msg.author.id !== auth.ownerid) {
 				msg.reply(getReply("bad-access-level"));
+				return;
 			};
 
 			var js = args.slice(1, args.length).join(' ');

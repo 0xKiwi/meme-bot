@@ -29,6 +29,7 @@ const MAX_TTS_LENGTH = 140;
 const EMBED_COLOR = 12697012;
 
 var queues = {};
+var voice = {};
 var servers = {};
 var seen = [];
 
@@ -302,7 +303,6 @@ var commands = {
 			voiceChannel.join()
 				.then(connection => {
 					voice[msg.guild.id] = connection;
-					msg.delete();
 				})
 				.catch(err => {
 					msg.reply("I couldn't join the channel.");
@@ -325,7 +325,6 @@ var commands = {
 	"leave": {
 		do: function(bot, msg, args) {
 			msg.channel.guild.voiceConnection.disconnect();
-			msg.delete(3000);
 		},
 		description: "Leaves a voice channel"
 	},
@@ -451,7 +450,6 @@ var commands = {
 	"pause": {
 		do: function(bot, msg, args) {
 			pauseMusic(msg);
-			msg.delete(3000);
 		},
 		description: "Pause music playback"
 	},
@@ -470,7 +468,6 @@ var commands = {
 	// Plays a song from YouTube
 	"play": {
 		do: function(bot, msg, args) {
-			msg.delete(5000);
 			var song = {};
 
 			// Handle links
@@ -518,10 +515,8 @@ var commands = {
 	// Shows the current queue
 	"queue": {
 		do: function(bot, msg, args) {
-			msg.delete(2000);
 			msg.channel.sendMessage(getQueueMessage(msg))
 				.then(message => {
-					message.delete(60000);
 				})
 				.catch(e => {
 					console.log(e);
@@ -610,7 +605,6 @@ var commands = {
 	"resume" : {
 		do: function(bot, msg, args) {
 			resumeMusic(msg);
-			msg.delete(3000);
 		},
 		description: "Resume playing music"
 	},
@@ -648,7 +642,6 @@ var commands = {
 	"skip": {
 		do: function(bot, msg, args) {
 			playNextInQueue(msg);
-			msg.delete(3000);
 		},
 		description: "Skip the current song"
 	},
@@ -729,7 +722,6 @@ var commands = {
 			var volume = parseInt(args[1]);
 			if (typeof volume === "number") {
 				setVolume(msg, volume);
-				msg.delete(3000);
 			}
 		},
 		description: "Set the volume"
@@ -816,9 +808,6 @@ function addToQueue(msg, song) {
 	queues[msg.guild.id].songs.push(song);
 
 	msg.channel.sendMessage(getQueueMessage(msg))
-		.then(message => {
-			message.delete(10000);
-		})
 		.catch(e => {
 			console.log(e);
 		});

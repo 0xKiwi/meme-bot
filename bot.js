@@ -26,7 +26,7 @@ logMsg("info", "Loaded all files");
 var version = "0.1.0";
 const BOT_STATUS_UPDATE_DELAY = 30000;
 const MAX_TTS_LENGTH = 140;
-const EMBED_COLOR = 3447003;
+const EMBED_COLOR = 12697012;
 
 var queues = {};
 var servers = {};
@@ -84,6 +84,7 @@ var commands = {
 	// Get a random cat fact
 	"cat": {
 		do: function(bot, msg, args) {
+			msg.channel.startTyping();
 			var factOptions = {
 				host: "catfacts-api.appspot.com",
 				path: "/api/facts"
@@ -101,14 +102,14 @@ var commands = {
 						imageResponse.on('data', function(imageChunk) {
 							var image = JSON.parse(imageChunk).file;
 							msg.channel.sendMessage("", {embed: {
-								color: EMBED_COLOR,
+								color: 14920496,
 								author: {
 									name: "Cat Facts™",
 									icon_url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/cat-icon.png",
 									url: image
 								},
 								description: fact,
-								thumbnail: {
+								image: {
 									url: image
 								},
 								footer: {
@@ -123,6 +124,7 @@ var commands = {
 			};
 
 			var factReq = http.request(factOptions, factCallback).end();
+			msg.channel.stopTyping();
 		},
 		description: "Get a random cat fact and picture"
 	},

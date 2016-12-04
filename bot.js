@@ -304,20 +304,6 @@ var commands = {
 		},
 		description: "Plays the sound effect: Leeroy Jenkins!"
 	},
-	// Makes the bot use tts to say something
-	"say": {
-		do: function(bot, msg, args) {
-			var voiceChannel = msg.member.voiceChannel;
-			if (!voiceChannel) {
-				return;
-			}
-
-			var text = args.splice(1, args.length).join(' ');
-
-			tts(text, voiceChannel);
-		},
-		description: "Will join the voice channel you are in"
-	},
 	// Leaves the voice channel
 	"leave": {
 		do: function(bot, msg, args) {
@@ -1041,10 +1027,6 @@ function setVolume(msg, volume) {
 
 // Text to speech
 function tts(text, voiceChannel) {
-	if (text.length > MAX_TTS_LENGTH) {
-		return;
-	}
-
 	var filename = text.replace(/\s+/g, '-').toLowerCase();
 	var dest = 'tts/' + filename + '.mp3';
 

@@ -45,6 +45,19 @@ var commands = {
 		},
 		description: "Plays the sound effect: Smoke weed everyday"
 	},
+	// Show a link to add Potato to another server
+	"add": {
+		do: function(bot, msg, args) {
+			msg.channel.sendMessage("", {embed: {
+				color: EMBED_COLOR,
+				author: {
+					name: "Click to add Potato to your server!",
+					icon_url: bot.user.avatarURL,
+					url: "https://discordapp.com/oauth2/authorize?&client_id=233636104132231168&scope=bot"
+				}
+			}});
+		}
+	},
 	// Sound effect: IT'S ALIIIIIVE!!!
 	"alive": {
 		do: function(bot, msg, args) {

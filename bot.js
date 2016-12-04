@@ -148,6 +148,28 @@ var commands = {
 		},
 		description: "Shows the changelog"
 	},
+	// Sound effect: China
+	"china": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/china.mp3");
+		},
+		description: "Plays the sound effect: Make america great again"
+	},
+	// Sound effect: Make america great again
+	"choppa": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/choppa.mp3");
+		},
+		description: "Plays the sound effect: Choppa"
+	},
 	// Sound effect: Deez nuts! Ha! Got 'em! Ha!'
 	"deeznuts": {
 		do: function(bot, msg, args) {
@@ -300,6 +322,17 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/mad.mp3");
 		},
 		description: "Plays the sound effect: Id only a game. Why you heff to be mad"
+	},
+	// Sound effect: Make america great again
+	"maga": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/maga.mp3");
+		},
+		description: "Plays the sound effect: Make america great again"
 	},
 	// Nuke a specified amount of messages
 	"nuke": {
@@ -631,7 +664,18 @@ var commands = {
 			}
 		},
 		description: "Set the volume"
-	}
+	},
+	// Sound effect: Great great wall
+	"wall": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/wall.mp3");
+		},
+		description: "Plays the sound effect: I will build a wall"
+	},
 };
 
 // Init bot and modules

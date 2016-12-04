@@ -203,21 +203,38 @@ var commands = {
 			};
 
 			var js = args.slice(1, args.length).join(' ');
-			var output = eval(js);
-
-			var endTime = now();
-			msg.channel.sendMessage("", {embed: {
-				color: EMBED_COLOR,
-				author: {
-					icon_url: bot.user.avatarURL,
-					name: "Output:"
-				},
-				description: output.toString(),
-				timestamp: new Date(),
-				footer: {
-					text: (endTime - startTime).toFixed(0) + " ms"
-				}
-			}});
+			var output;
+			try {
+				output = eval(js);
+				var endTime = now();
+				msg.channel.sendMessage("", {embed: {
+					color: 838218,
+					author: {
+						icon_url: bot.user.avatarURL,
+						name: "Output:"
+					},
+					description: output.toString(),
+					timestamp: new Date(),
+					footer: {
+						text: (endTime - startTime).toFixed(0) + " ms"
+					}
+				}});
+			} catch (e) {
+				output = e;
+				var endTime = now();
+				msg.channel.sendMessage("", {embed: {
+					color: 14367284,
+					author: {
+						icon_url: bot.user.avatarURL,
+						name: "Output:"
+					},
+					description: output.toString(),
+					timestamp: new Date(),
+					footer: {
+						text: (endTime - startTime).toFixed(0) + " ms"
+					}
+				}});
+			}
 		},
 		description: "If you're reading this, it's not for you"
 	},

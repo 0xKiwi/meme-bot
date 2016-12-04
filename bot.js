@@ -569,7 +569,7 @@ var commands = {
 					var quote = JSON.parse(chunk)[0].toString();
 
 					msg.channel.sendMessage("", {embed: {
-						color: EMBED_COLOR,
+						color: 11240561,
 						author: {
 							name: "Ron Swanson",
 							icon_url: "http://i.imgur.com/VTMQFUG.png",

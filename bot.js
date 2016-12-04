@@ -611,6 +611,36 @@ var commands = {
 		},
 		description: "Resume playing music"
 	},
+	// Sound effect: That's retarded
+	"retarded": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/retarded.mp3");
+		},
+		description: "Plays the sound effect: That's retarded"
+	},
+	// Makes the bot use tts to say something
+	"say": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return;
+			}
+
+			var text = args.splice(1, args.length).join(' ');
+
+			if (text.length > MAX_TTS_LENGTH) {
+				msg.reply("that's too long.");
+				return;
+			}
+
+			tts(text, voiceChannel);
+		},
+		description: "Will say something in the voicechannel you are in"
+	},
 	// Skip the curretn song
 	"skip": {
 		do: function(bot, msg, args) {

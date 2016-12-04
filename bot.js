@@ -478,21 +478,14 @@ var commands = {
 			fields.push({
 				name: "ID",
 				value: user.id,
-			});
-
-			fields.push({
-				name: "Joined Discord",
-				value: user.createdAt.toLocaleString(),
 				inline: true
 			});
 
-			if (seen[user.id] != null && seen[user.id] != "") {
-				fields.push({
-					name: "Last seen",
-					value: seen[user.id],
-					inline: true
-				});
-			}
+			fields.push({
+				name: "Discriminator",
+				value: user.discriminator,
+				inline: true
+			});
 
 			var roles = member.roles.array();
 			var rolesString = "";
@@ -510,13 +503,26 @@ var commands = {
 				value: rolesString.slice(0, -2)
 			});
 
+			fields.push({
+				name: "Joined Discord",
+				value: user.createdAt.toLocaleString(),
+				inline: true
+			});
+
+			if (seen[user.id] != null && seen[user.id] != "") {
+				fields.push({
+					name: "Last seen",
+					value: seen[user.id],
+					inline: true
+				});
+			}
+
 			if (user.presence.game) {
 				fields.push({
 					name: "Playing",
 					value: user.presence.game.name
 				});
 			}
-
 
 			msg.channel.sendMessage("", {embed: {
 				color: EMBED_COLOR,

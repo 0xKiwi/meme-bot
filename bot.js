@@ -173,19 +173,26 @@ var commands = {
 	// Eval
 	"eval": {
 		do: function(bot, msg, args) {
+			var startTime = now();
 			if (msg.author.id !== auth.ownerid) {
 				msg.reply(getReply("bad-access-level"));
 			};
 
 			var js = args.slice(1, args.length).join(' ');
 			var output = eval(js);
+
+			var endTime = now();
 			msg.channel.sendMessage("", {embed: {
 				color: EMBED_COLOR,
 				author: {
 					icon_url: bot.user.avatarURL,
 					name: "Output:"
 				},
-				description: output.toString()
+				description: output.toString(),
+				timestamp: new Date(),
+				footer: {
+					text: (endTime - startTime).toFixed(0) + " ms"
+				}
 			}});
 		}
 	},

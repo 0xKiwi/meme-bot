@@ -220,6 +220,17 @@ var commands = {
 		},
 		description: "If you're reading this, it's not for you"
 	},
+	// Sound effect: FUS RO DAH
+	"fusrodah": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/fus-ro-dah.mp3");
+		},
+		description: "Plays the sound effect: FUS RO DAH"
+	},
 	// Sound effect: Haha!
 	"haha": {
 		do: function(bot, msg, args) {
@@ -346,6 +357,17 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/nein.mp3");
 		},
 		description: "Plays the sound effect: nein"
+	},
+	// Sound effect: NI!
+	"ni": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/ni.mp3");
+		},
+		description: "Plays the sound effect: NI!"
 	},
 	// Nuke a specified amount of messages
 	"nuke": {

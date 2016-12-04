@@ -763,14 +763,14 @@ function getOnlineUsersCount() {
 	for (var i = 0; i < guilds.length; i++) {
 		var members = guilds[i].members.array();
 		for (var j = 0; j < members.length; j++) {
-			if (members[j].user.presence.status == "online" && !members[j].user.bot) {
+			if (members[j].presence.status == "online" && !members[j].user.bot) {
 				amount++;
 			}
 		}
 	}
 
 	if (amount <= 1) {
-		amount = "a couple";
+		amount = "a couple of";
 	}
 
 	return amount;

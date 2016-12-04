@@ -157,6 +157,25 @@ var commands = {
 		},
 		description: "Plays the sound effect: I have crippling depression"
 	},
+	// Eval
+	"eval": {
+		do: function(bot, msg, args) {
+			if (msg.author.id !== auth.ownerid) {
+				msg.reply(getReply("bad-access-level"));
+			};
+
+			var js = args.slice(1, args.length).join(' ');
+			var output = eval(js);
+			msg.channel.sendMessage("", {embed: {
+				color: EMBED_COLOR,
+				author: {
+					icon_url: bot.user.avatarURL,
+					name: "Output:"
+				},
+				description: output.toString()
+			}});
+		}
+	},
 	// Sound effect: Haha!
 	"haha": {
 		do: function(bot, msg, args) {

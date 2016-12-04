@@ -770,18 +770,13 @@ function downloadTTS(url, dest) {
 // Get the number of online users
 function getOnlineUsersCount() {
 	var amount = 0;
-	var guilds = bot.guilds.array();
-	for (var i = 0; i < guilds.length; i++) {
-		var members = guilds[i].members.array();
-		for (var j = 0; j < members.length; j++) {
-			if (members[j].presence.status == "online" && !members[j].user.bot) {
-				amount++;
-			}
-		}
-	}
 
-	if (amount <= 1) {
-		amount = "a couple of";
+	var users = bot.users.array();
+
+	for (key in users) {
+		if (users[key].presence.status == "online" && !users[key].bot) {
+			amount++;
+		}
 	}
 
 	return amount;

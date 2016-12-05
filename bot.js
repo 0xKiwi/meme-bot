@@ -940,7 +940,7 @@ function messageHandler(msg) {
 		return;
 	}
 
-	logMsg('info', msg.author.toString() + ' issued command "' + cmd + '""');
+	logMsg('info', msg.guild.id + " (" + msg.guild.name + "): " + msg.channel.id + " (" + msg.channel.name + "): " + msg.author.id + " (" + msg.author.username + "#" + msg.author.discriminator + "): " + msg.cleanContent);
 
 	try {
 		cmd.do(bot, msg, args);

@@ -910,7 +910,9 @@ function getReply(type) {
 // Logs a message to the console
 function logMsg(priority, message) {
 	var now = new Date().format("yyyy-mm-dd HH:MM:ss.l");
-	console.log(now + " [" + priority.toUpperCase() + "] " + message);
+	var log = now + " [" + priority.toUpperCase() + "] " + message;
+	console.log(log);
+	fs.appendFile('data/log.txt', log + '\n', function (err) {});
 }
 
 // Handle messages
@@ -933,6 +935,8 @@ function messageHandler(msg) {
 		msg.reply(getReply("bad-command"));
 		return;
 	}
+
+	logMsg('info', msg.author.toString() + ' issued command "' + cmd + '""');
 
 	try {
 		cmd.do(bot, msg, args);

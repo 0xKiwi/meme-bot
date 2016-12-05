@@ -54,7 +54,7 @@ var commands = {
 				author: {
 					name: "Click to add Potato to your server!",
 					icon_url: bot.user.avatarURL,
-					url: "https://discordapp.com/oauth2/authorize?&client_id=233636104132231168&scope=bot"
+					url: "https://discordapp.com/oauth2/authorize?client_id=233636104132231168&scope=bot&permissions=36826112"
 				}
 			}});
 		},

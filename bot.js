@@ -772,7 +772,7 @@ bot.on("reconnecting", () => {
 });
 
 bot.on("error", (e) => {
-	logMsg("error", "Serious connection error: " + e);
+	logMsg("error", "Serious error: " + e.stack);
 });
 
 bot.on("message", function(msg) {
@@ -801,7 +801,7 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 });
 
 process.on("unhandledRejection", err => {
-	console.error("Uncaught Promise Error: \n" + err.stack);
+	logMsg('error', "Uncaught Promise Error: \n" + err.stack)
 });
 
 // Add a song to the queue

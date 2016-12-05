@@ -959,6 +959,10 @@ function pauseMusic(msg) {
 }
 
 function playFileInVoiceChannel(voiceChannel, file) {
+	if (voiceChannel.guild.afkChannelID == voiceChannel.id) {
+		return;
+	}
+	
 	voiceChannel.join()
 		.then(connection => {
 			logMsg('info', voiceChannel.guild.id + " (" + voiceChannel.guild.name + "): " + voiceChannel.id + " (" + voiceChannel.name + "): " + "Play " + file);

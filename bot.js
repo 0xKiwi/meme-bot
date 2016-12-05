@@ -727,24 +727,6 @@ var commands = {
 		},
 		description: "Skip the current song"
 	},
-	// Allows the user to set a timer.
-	// Takes the first argument as a time in seconds
-	"timer": {
-		do: function(bot, msg, args) {
-			var time = args[1];
-			if (isNaN(time)) {
-				msg.reply("That's not a fucking number... Idiot.");
-				return;
-			}
-
-			msg.reply("I will remind you in " + time + " seconds.");
-
-			setTimeout(function () {
-				msg.channel.sendTTSMessage(msg.author.toString() + ", your timer is done!");
-			}, time * 1000);
-		},
-		description: "Set a timer"
-	},
 	// Alias for join
 	"summon": {
 		do: function(bot, msg, args) {
@@ -790,6 +772,24 @@ var commands = {
 			var req = http.request(options, callback).end();
 		},
 		description: "Get a Ron Swanson quote"
+	},
+	// Allows the user to set a timer.
+	// Takes the first argument as a time in seconds
+	"timer": {
+		do: function(bot, msg, args) {
+			var time = args[1];
+			if (isNaN(time)) {
+				msg.reply("That's not a fucking number... Idiot.");
+				return;
+			}
+
+			msg.reply("I will remind you in " + time + " seconds.");
+
+			setTimeout(function () {
+				msg.channel.sendTTSMessage(msg.author.toString() + ", your timer is done!");
+			}, time * 1000);
+		},
+		description: "Set a timer"
 	},
 	// Start listening to all channels again
 	"unbind": {

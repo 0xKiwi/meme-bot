@@ -787,7 +787,7 @@ bot.on("presenceUpdate", function(oldMember, newMember) {
 });
 
 bot.on('voiceStateUpdate', function(oldMember, newMember) {
-	if (newMember.user.id == bot.user.id || newMember.user.bot) {
+	if (newMember.user.id == bot.user.id || newMember.user.bot || newMember.guild.id != "115880548303372297") {
 		return;
 	}
 

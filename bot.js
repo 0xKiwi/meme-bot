@@ -300,6 +300,8 @@ var commands = {
 			if (!voiceChannel) {
 				return msg.reply("you must be in a voice channel first.");
 			}
+			
+			logMsg('info', voiceChannel.guild.id + " (" + voiceChannel.guild.name + "): " + voiceChannel.id + " (" + voiceChannel.name + "): Joining voice channel");
 			voiceChannel.join()
 				.then(connection => {
 					voice[msg.guild.id] = connection;
@@ -1094,6 +1096,7 @@ function playFileInVoiceChannel(voiceChannel, file) {
 		return;
 	}
 
+	logMsg('info', voiceChannel.guild.id + " (" + voiceChannel.guild.name + "): " + voiceChannel.id + " (" + voiceChannel.name + "): Joining voice channel");
 	voiceChannel.join()
 		.then(connection => {
 			logMsg('info', voiceChannel.guild.id + " (" + voiceChannel.guild.name + "): " + voiceChannel.id + " (" + voiceChannel.name + "): " + "Play " + file);
@@ -1112,6 +1115,7 @@ function playNextInQueue(msg) {
 		return msg.reply("you must be in a voice channel first.");
 	}
 
+	logMsg('info', voiceChannel.guild.id + " (" + voiceChannel.guild.name + "): " + voiceChannel.id + " (" + voiceChannel.name + "): Joining voice channel");
 	voiceChannel.join()
 		.then(connection => {
 			if (!voice[msg.guild.id]) {

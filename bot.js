@@ -639,6 +639,87 @@ var commands = {
 		},
 		description: "Will say something in the voicechannel you are in"
 	},
+	// Display guild info
+	"server": {
+		do: function(bot, msg, args) {
+			var guild = msg.guild;
+			var fields = [];
+
+			fields.push({
+				name: "Owner",
+				value: guild.owner.user.username + " #" + guild.owner.user.discriminator,
+				inline: true
+			});
+
+			fields.push({
+				name: "Created",
+				value: guild.createdAt.toLocaleString(),
+				inline: true
+			});
+
+			var onlineMembers = guild.members.filter(function(member) {
+				if (member.presence.status != "offline") return true;
+			}).size;
+
+			fields.push({
+				name: "Online members",
+				value: onlineMembers + " / " + guild.memberCount + "",
+				inline: true
+			});
+
+			fields.push({
+				name: "Region",
+				value: guild.region,
+				inline: true
+			});
+
+			var textChannels = guild.channels.filter(function(channel) {
+				if (channel.type == "text") return true;
+			}).size;
+
+			fields.push({
+				name: "Text channels",
+				value: textChannels,
+				inline: true
+			});
+
+			var voiceChannels = guild.channels.filter(function(channel) {
+				if (channel.type == "voice") return true;
+			}).size;
+
+			fields.push({
+				name: "Voice channels",
+				value: voiceChannels,
+				inline: true
+			});
+
+			fields.push({
+				name: "Roles",
+				value: guild.roles.size,
+				inline: true
+			});
+
+			fields.push({
+				name: "Emoji",
+				value: guild.emojis.size,
+				inline: true
+			});
+
+			msg.channel.sendMessage("", {embed: {
+				color: EMBED_COLOR,
+				author: {
+					name: guild.name
+				},
+				thumbnail: {
+					url: guild.iconURL
+				},
+				description: "Server ID: " + guild.id,
+				fields: fields,
+				timestamp: new Date()
+			}});
+		},
+		description: "Display server info"
+	},
 	// Skip the curretn song
 	"skip": {
 		do: function(bot, msg, args) {

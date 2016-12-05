@@ -876,17 +876,9 @@ function downloadTTS(url, dest) {
 
 // Get the number of online users
 function getOnlineUsersCount() {
-	var amount = 0;
-
-	var users = bot.users.array();
-
-	for (key in users) {
-		if (users[key].presence.status == "online" && !users[key].bot) {
-			amount++;
-		}
-	}
-
-	return amount;
+	return bot.users.filter(function(user) {
+		if (user.presence.status != "offline") return true;
+	}).size;
 }
 
 // Get the string for the queue message

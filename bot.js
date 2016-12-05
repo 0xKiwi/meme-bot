@@ -727,6 +727,64 @@ var commands = {
 		},
 		description: "Skip the current song"
 	},
+	//
+	"stats": {
+		do: function(bot, msg, args) {
+			var fields = [];
+
+			fields.push({
+				name: "Owner",
+				value: "Bramskyyy #1706",
+				inline: true
+			});
+
+			fields.push({
+				name: "Uptime",
+				value: secondsToHHMMSS(Math.round(bot.uptime / 1000)),
+				inline: true
+			});
+
+			fields.push({
+				name: "Users",
+				value: getOnlineUsersCount(),
+				inline: true
+			});
+
+			fields.push({
+				name: "Servers",
+				value: bot.guilds.size,
+				inline: true
+			});
+
+			if (msg.author.id == auth.ownerid) {
+				fields.push({
+					name: "CPU usage",
+					value: 'Unavailable',
+					inline: true
+				});
+
+				fields.push({
+					name: "Memory usage",
+					value: Math.round(process.memoryUsage().rss / 1000000, -1) + " MB",
+					inline: true
+				});
+			}
+
+			msg.channel.sendMessage("", {embed: {
+				color: EMBED_COLOR,
+				author: {
+					name: bot.user.username
+				},
+				thumbnail: {
+					url: "http://i.imgur.com/IERDoA4.png"
+				},
+				description: bot.user.username + " v" + version,
+				fields: fields,
+				timestamp: new Date()
+			}});
+		},
+		description: "Show stats for the bot"
+	},
 	// Alias for join
 	"summon": {
 		do: function(bot, msg, args) {
@@ -1107,6 +1165,22 @@ function saveData(file, callback) {
 	fs.writeFile(file, JSON.stringify(object), function(err) {
 		callback(err);
 	});
+}
+
+function secondsToHHMMSS(totalSeconds) {
+	var hours   = Math.floor(totalSeconds / 3600);
+	var minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
+	var seconds = totalSeconds - (hours * 3600) - (minutes * 60);
+
+	// round seconds
+	seconds = Math.round(seconds * 100) / 100
+
+	var result = (hours < 10 ? "0" + hours : hours);
+
+	result += "h " + (minutes < 10 ? "0" + minutes : minutes);
+	result += "m " + (seconds  < 10 ? "0" + seconds : seconds) + "s";
+
+	return result;
 }
 
 // Adjust the volume

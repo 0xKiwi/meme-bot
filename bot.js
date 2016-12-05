@@ -550,11 +550,7 @@ var commands = {
 			var rolesString = "";
 
 			for (var i = 0; i < roles.length; i++) {
-				var r = roles[i].name.toString();
-				if (r.slice(0, 1) == "@") {
-					r = r.slice(1, r.length);
-				}
-				rolesString += r + ", ";
+				rolesString += roles[i].name.unmention() + ", ";
 			}
 
 			fields.push({
@@ -1073,6 +1069,10 @@ function userLeftVoiceChannel(newMember, voiceChannel) {
 
 String.prototype.capitalizeFirstLetter = function() {
 	return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+String.prototype.unmention = function() {
+	return this.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
 }
 
 bot.login(auth.api.discord);

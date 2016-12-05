@@ -375,6 +375,11 @@ var commands = {
 	// Nuke a specified amount of messages
 	"nuke": {
 		do: function(bot, msg, args) {
+			if (msg.author.id !== auth.ownerid) {
+				msg.reply(getReply("bad-access-level"));
+				return;
+			};
+
 			let messagecount = parseInt(args[1]) + 1;
 			msg.channel.fetchMessages({limit: messagecount})
 				.then(msgs => msg.channel.bulkDelete(msgs));

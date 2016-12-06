@@ -183,6 +183,17 @@ var commands = {
 		},
 		description: "Plays the sound effect: Deez nuts! Ha! Got em!"
 	},
+	// Sound effect from Unreal Tournament 2004
+	"denied": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/denied.mp3");
+		},
+		description: "Unreal Tournament 2004 sound effect"
+	},
 	// Sound effect: I have crippling depression
 	"depression": {
 		do: function(bot, msg, args) {

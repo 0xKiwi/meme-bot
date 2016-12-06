@@ -440,6 +440,17 @@ var commands = {
 		},
 		description: "Unreal Tournament 2004 sound effect"
 	},
+	// Sound effect from Unreal Tournament 2004
+	"monsterkill": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/monsterkill.mp3");
+		},
+		description: "Unreal Tournament 2004 sound effect"
+	},
 	// Sound effect: nein
 	"nein": {
 		do: function(bot, msg, args) {
@@ -619,78 +630,16 @@ var commands = {
 		},
 		description: "Show the queue"
 	},
-	// Show info about a user
-	"user": {
+	// Sound effect from Unreal Tournament 2004
+	"rampage": {
 		do: function(bot, msg, args) {
-			msg.channel.startTyping()
-			var user = msg.mentions.users.array()[1];
-			var member = msg.guild.member(bot.users.get(user.id));
-			updateLastSeen(user);
-
-			var fields = [];
-
-			fields.push({
-				name: "ID",
-				value: user.id,
-				inline: true
-			});
-
-			fields.push({
-				name: "Discriminator",
-				value: "#" + user.discriminator,
-				inline: true
-			});
-
-			var roles = member.roles.array();
-			var rolesString = "";
-
-			for (var i = 0; i < roles.length; i++) {
-				rolesString += roles[i].name.unmention() + ", ";
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
 			}
-
-			fields.push({
-				name: "Roles",
-				value: rolesString.slice(0, -2)
-			});
-
-			fields.push({
-				name: "Joined Discord",
-				value: user.createdAt.toLocaleString(),
-				inline: true
-			});
-
-			if (seen[user.id] != null && seen[user.id] != "") {
-				fields.push({
-					name: "Last seen",
-					value: seen[user.id],
-					inline: true
-				});
-			}
-
-			if (user.presence.game) {
-				fields.push({
-					name: "Playing",
-					value: user.presence.game.name
-				});
-			}
-
-			msg.channel.sendMessage("", {embed: {
-				color: EMBED_COLOR,
-				author: {
-					name: user.username,
-					icon_url: user.avatarURL
-				},
-				thumbnail: {
-					url: user.avatarURL
-				},
-				fields: fields
-			}})
-			.then(function() {
-				msg.channel.stopTyping();
-			});
-			msg.channel.stopTyping();
+			playFileInVoiceChannel(voiceChannel, "sound/rampage.mp3");
 		},
-		description: "Show info about a user"
+		description: "Unreal Tournament 2004 sound effect"
 	},
 	// Resume the current audio stream
 	"resume" : {
@@ -956,6 +905,79 @@ var commands = {
 			msg.reply("unfortunately this command is not yet implemented.");
 		},
 		description: "Unbind the bot from any channel"
+	},
+	// Show info about a user
+	"user": {
+		do: function(bot, msg, args) {
+			msg.channel.startTyping()
+			var user = msg.mentions.users.array()[1];
+			var member = msg.guild.member(bot.users.get(user.id));
+			updateLastSeen(user);
+
+			var fields = [];
+
+			fields.push({
+				name: "ID",
+				value: user.id,
+				inline: true
+			});
+
+			fields.push({
+				name: "Discriminator",
+				value: "#" + user.discriminator,
+				inline: true
+			});
+
+			var roles = member.roles.array();
+			var rolesString = "";
+
+			for (var i = 0; i < roles.length; i++) {
+				rolesString += roles[i].name.unmention() + ", ";
+			}
+
+			fields.push({
+				name: "Roles",
+				value: rolesString.slice(0, -2)
+			});
+
+			fields.push({
+				name: "Joined Discord",
+				value: user.createdAt.toLocaleString(),
+				inline: true
+			});
+
+			if (seen[user.id] != null && seen[user.id] != "") {
+				fields.push({
+					name: "Last seen",
+					value: seen[user.id],
+					inline: true
+				});
+			}
+
+			if (user.presence.game) {
+				fields.push({
+					name: "Playing",
+					value: user.presence.game.name
+				});
+			}
+
+			msg.channel.sendMessage("", {embed: {
+				color: EMBED_COLOR,
+				author: {
+					name: user.username,
+					icon_url: user.avatarURL
+				},
+				thumbnail: {
+					url: user.avatarURL
+				},
+				fields: fields
+			}})
+			.then(function() {
+				msg.channel.stopTyping();
+			});
+			msg.channel.stopTyping();
+		},
+		description: "Show info about a user"
 	},
 	// Adjust the volume
 	"volume": {

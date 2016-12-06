@@ -1022,6 +1022,17 @@ var commands = {
 		},
 		description: "Plays the sound effect: I will build a wall"
 	},
+	// Sound effect: GTA V Wasted
+	"wasted": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/wasted.mp3");
+		},
+		description: "Plays the sound effect: GTA V Wasted"
+	},
 };
 
 // Init bot and modules

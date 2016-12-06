@@ -18,11 +18,12 @@
 		"you're not my supervisor!"
 	],
 	"game": [
-		"jenga",
-		"with lego",
 		"mashed potato",
 		"french fries",
 		"on {{ servers }} servers",
-		"with {{ users }} users"
+		"with {{ users }} users",
+		"with fire",
+		"it cool",
+		"the game"
 	]
 }

@@ -172,6 +172,17 @@ var commands = {
 		},
 		description: "Plays the sound effect: Choppa"
 	},
+	// Cricket sounds
+	"crickets": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/crickets.mp3");
+		},
+		description: "Plays the sound effect: Crickets"
+	},
 	// Sound effect: Deez nuts! Ha! Got 'em! Ha!'
 	"deeznuts": {
 		do: function(bot, msg, args) {

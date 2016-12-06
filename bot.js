@@ -670,6 +670,17 @@ var commands = {
 		},
 		description: "Plays the sound effect: That's retarded"
 	},
+	// Sound effect: Sad trombone
+	"sadtrombone": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/sad-trombone.mp3");
+		},
+		description: "Plays the sound effect: Sad trombone"
+	},
 	// Makes the bot use tts to say something
 	"say": {
 		do: function(bot, msg, args) {

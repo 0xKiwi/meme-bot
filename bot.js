@@ -283,6 +283,17 @@ var commands = {
 		},
 		description: "Unreal Tournament 2004 sound effect"
 	},
+	// Sound effect: Ha GAYYYY
+	"hagay": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/ha-gay.mp3");
+		},
+		description: "Sound effect: HA GAYYYY"
+	},
 	// Sound effect: Haha!
 	"haha": {
 		do: function(bot, msg, args) {

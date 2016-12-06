@@ -411,6 +411,17 @@ var commands = {
 		},
 		description: "Makes the bot join your voice channel"
 	},
+	// Just do it
+	"justdoit": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/just-do-it.mp3");
+		},
+		description: "Just do it!"
+	}
 	// Sound effect: Leeroy Jenkins!
 	"leeroy": {
 		do: function(bot, msg, args) {

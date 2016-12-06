@@ -194,6 +194,28 @@ var commands = {
 		},
 		description: "Plays the sound effect: I have crippling depression"
 	},
+	// Sound effect from Unreal Tournament 2004
+	"dominating": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/dominating.mp3");
+		},
+		description: "Unreal Tournament 2004 sound effect"
+	},
+	// Sound effect from Unreal Tournament 2004
+	"doublekill": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/double-kill.mp3");
+		},
+		description: "Unreal Tournament 2004 sound effect"
+	},
 	// Eval
 	"eval": {
 		do: function(bot, msg, args) {
@@ -250,6 +272,17 @@ var commands = {
 		},
 		description: "Plays the sound effect: FUS RO DAH"
 	},
+	// Sound effect from Unreal Tournament 2004
+	"godlike": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/godlike.mp3");
+		},
+		description: "Unreal Tournament 2004 sound effect"
+	},
 	// Sound effect: Haha!
 	"haha": {
 		do: function(bot, msg, args) {
@@ -260,6 +293,17 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/nelson-haha.mp3");
 		},
 		description: "Plays the sound effect: Haha!"
+	},
+	// Sound effect from Unreal Tournament 2004
+	"headshot": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/headshot.mp3");
+		},
+		description: "Unreal Tournament 2004 sound effect"
 	},
 	// Show help for each command
 	"help": {
@@ -281,6 +325,28 @@ var commands = {
 			msg.channel.sendMessage(getReply("greeting").capitalizeFirstLetter() + ", " + msg.author);
 		},
 		description: "Greets you"
+	},
+	// Sound effect from Unreal Tournament 2004
+	"holyshit": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/holy-shit.mp3");
+		},
+		description: "Unreal Tournament 2004 sound effect"
+	},
+	// Sound effect from Unreal Tournament 2004
+	"invulnerable": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/invulnerable.mp3");
+		},
+		description: "Unreal Tournament 2004 sound effect"
 	},
 	// Sound effect: My name is jeff
 	"jeff": {
@@ -351,6 +417,17 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/maga.mp3");
 		},
 		description: "Plays the sound effect: Make america great again"
+	},
+	// Sound effect from Unreal Tournament 2004
+	"megakill": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/megakill.mp3");
+		},
+		description: "Unreal Tournament 2004 sound effect"
 	},
 	// Sound effect: nein
 	"nein": {

@@ -253,7 +253,7 @@ var commands = {
 				output = eval(js);
 				var endTime = now();
 				msg.channel.sendMessage("", {embed: {
-					color: 838218,
+					color: 0x0CCA4A,
 					author: {
 						icon_url: bot.user.avatarURL,
 						name: "Output"
@@ -268,7 +268,7 @@ var commands = {
 				output = e;
 				var endTime = now();
 				msg.channel.sendMessage("", {embed: {
-					color: 14367284,
+					color: 0xDB3A34,
 					author: {
 						icon_url: bot.user.avatarURL,
 						name: "Output"

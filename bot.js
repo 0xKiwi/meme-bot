@@ -294,6 +294,54 @@ var commands = {
 		},
 		description: "Plays the sound effect: FUS RO DAH"
 	},
+	// Github status
+	"github": {
+		do: function(bot, msg, args) {
+			var options = {
+				host: "status.github.com",
+				path: "/api/last-message.json"
+			}
+
+			var callback = function(response) {
+				response.setEncoding('utf8');
+				response.on('data', function(chunk) {
+					var last_message = JSON.parse(chunk);
+
+					var timestamp = new Date(last_message.created_on);
+
+					var statusColor = 0xDB3A34;
+					var iconURL = "https://status.github.com/images/status-icon-red.png";
+
+					if (last_message.status == "good") {
+						statusColor = 0x0CCA4A;
+						iconURL = "https://status.github.com/images/status-icon-green.png";
+					} else if (last_message.status == "minor") {
+						statusColor = 0xF29D50;
+						iconURL = "https://status.github.com/images/status-icon-orange.png";
+					}
+
+					msg.channel.sendMessage("", {embed: {
+						color: statusColor,
+						author: {
+							name: "GitHub Status",
+							url: "https://status.github.com/"
+						},
+						description: last_message.body,
+						timestamp: timestamp,
+						footer: {
+							icon_url: iconURL,
+							text: 'Last update on'
+						}
+					}});
+				});
+			};
+
+			var req = https.request(options, callback).end();
+
+
+		},
+		description: "Get GitHub status"
+	},
 	// Sound effect from Unreal Tournament 2004
 	"godlike": {
 		do: function(bot, msg, args) {

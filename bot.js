@@ -212,7 +212,7 @@ var commands = {
 					color: 838218,
 					author: {
 						icon_url: bot.user.avatarURL,
-						name: "Output:"
+						name: "Output"
 					},
 					description: output.toString(),
 					timestamp: new Date(),
@@ -227,7 +227,7 @@ var commands = {
 					color: 14367284,
 					author: {
 						icon_url: bot.user.avatarURL,
-						name: "Output:"
+						name: "Output"
 					},
 					description: output.toString(),
 					timestamp: new Date(),

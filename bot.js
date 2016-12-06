@@ -300,7 +300,7 @@ var commands = {
 			if (!voiceChannel) {
 				return msg.reply("you must be in a voice channel first.");
 			}
-			
+
 			logMsg('info', voiceChannel.guild.id + " (" + voiceChannel.guild.name + "): " + voiceChannel.id + " (" + voiceChannel.name + "): Joining voice channel");
 			voiceChannel.join()
 				.then(connection => {
@@ -729,7 +729,18 @@ var commands = {
 		},
 		description: "Skip the current song"
 	},
-	//
+	// Sound effect: Don't be stupid be a smarty join the nazi party
+	"smarty": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/be-a-smarty.mp3");
+		},
+		description: "Don't be stupid be a smarty come and join the nazi party"
+	},
+	// SHow bot stats
 	"stats": {
 		do: function(bot, msg, args) {
 			var fields = [];

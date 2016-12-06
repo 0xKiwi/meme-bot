@@ -421,7 +421,7 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/just-do-it.mp3");
 		},
 		description: "Just do it!"
-	}
+	},
 	// Sound effect: Leeroy Jenkins!
 	"leeroy": {
 		do: function(bot, msg, args) {

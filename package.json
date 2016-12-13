@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A multi-purpose discord bot",
   "main": "bot.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schwifty-space/potato-bot.git"
+  },
   "keywords": [
     "potato",
     "bot",
@@ -17,6 +21,6 @@
     "node-opus": "^0.2.2",
     "omdb": "^0.7.0",
     "opusscript": "0.0.1",
-    "uws": "^0.12.0"
+    "uws": "^0.11.1"
   }
 }

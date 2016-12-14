@@ -1137,7 +1137,7 @@ bot.on("reconnecting", () => {
 });
 
 bot.on("error", (e) => {
-	logMsg("error", "Serious error: " + e.stack);
+	logMsg("error", "Serious error: " + e);
 });
 
 bot.on("message", function(msg) {

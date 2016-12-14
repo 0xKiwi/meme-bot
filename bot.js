@@ -876,6 +876,42 @@ var commands = {
 		do: function(bot, msg, args) {
 			var fields = [];
 
+			var handleUsage = function(err, result) {
+				if (msg.author.id == auth.ownerid) {
+					if (err) {
+						fields.push({
+							name: "CPU usage",
+							value: 'Unavailable',
+							inline: true
+						});
+					} else {
+						fields.push({
+							name: "CPU usage",
+							value: result.cpu + "%",
+							inline: true
+						});
+					}
+					fields.push({
+						name: "Memory usage",
+						value: Math.round(process.memoryUsage().rss / 1000000, -1) + " MB",
+						inline: true
+					});
+				}
+
+				msg.channel.sendMessage("", {embed: {
+					color: EMBED_COLOR,
+					author: {
+						name: bot.user.username
+					},
+					thumbnail: {
+						url: "http://i.imgur.com/IERDoA4.png"
+					},
+					description: bot.user.username + " v" + version,
+					fields: fields,
+					timestamp: new Date()
+				}});
+			};
+
 			fields.push({
 				name: "Owner",
 				value: "Bramskyyy #1706",
@@ -900,45 +936,8 @@ var commands = {
 				inline: true
 			});
 
-			if (msg.author.id == auth.ownerid) {
-				if (os.platform() != "win32") {
-					var pid = process.pid // you can use any valid PID instead
-					usage.lookup(pid, function(err, result) {
-						if (result) {
-							fields.push({
-								name: "CPU usage",
-								value: result.spu + "%",
-								inline: true
-							});
-						} else {
-							fields.push({
-								name: "CPU usage",
-								value: 'Unavailable',
-								inline: true
-							});
-						}
-					});
-				}
-
-				fields.push({
-					name: "Memory usage",
-					value: Math.round(process.memoryUsage().rss / 1000000, -1) + " MB",
-					inline: true
-				});
-			}
-
-			msg.channel.sendMessage("", {embed: {
-				color: EMBED_COLOR,
-				author: {
-					name: bot.user.username
-				},
-				thumbnail: {
-					url: "http://i.imgur.com/IERDoA4.png"
-				},
-				description: bot.user.username + " v" + version,
-				fields: fields,
-				timestamp: new Date()
-			}});
+			var pid = process.pid // you can use any valid PID instead
+			usage.lookup(pid, handleUsage);
 		},
 		description: "Show stats for the bot"
 	},

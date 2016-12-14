@@ -11,6 +11,8 @@ const YouTube = require('youtube-node');
 const ytdl = require("ytdl-core");
 const googleTTS = require('google-tts-api');
 const omdb = require('omdb');
+const os = require('os');
+const usage = require('usage');
 require("write-file-atomic");
 
 logMsg("info", "Loaded all modules");
@@ -899,11 +901,24 @@ var commands = {
 			});
 
 			if (msg.author.id == auth.ownerid) {
-				fields.push({
-					name: "CPU usage",
-					value: 'Unavailable',
-					inline: true
-				});
+				if (os.platform() != "win32") {
+					var pid = process.pid // you can use any valid PID instead
+					usage.lookup(pid, function(err, result) {
+						if (result) {
+							fields.push({
+								name: "CPU usage",
+								value: result.spu + "%",
+								inline: true
+							});
+						} else {
+							fields.push({
+								name: "CPU usage",
+								value: 'Unavailable',
+								inline: true
+							});
+						}
+					});
+				}
 
 				fields.push({
 					name: "Memory usage",

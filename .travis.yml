@@ -10,6 +10,5 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - libgnome-keyring-dev
     packages:
       - g++-4.8

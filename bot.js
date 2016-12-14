@@ -11,8 +11,6 @@ const YouTube = require('youtube-node');
 const ytdl = require("ytdl-core");
 const googleTTS = require('google-tts-api');
 const omdb = require('omdb');
-const os = require('os');
-const usage = require('usage');
 require("write-file-atomic");
 
 logMsg("info", "Loaded all modules");
@@ -876,42 +874,6 @@ var commands = {
 		do: function(bot, msg, args) {
 			var fields = [];
 
-			var handleUsage = function(err, result) {
-				if (msg.author.id == auth.ownerid) {
-					if (err) {
-						fields.push({
-							name: "CPU usage",
-							value: 'Unavailable',
-							inline: true
-						});
-					} else {
-						fields.push({
-							name: "CPU usage",
-							value: result.cpu + "%",
-							inline: true
-						});
-					}
-					fields.push({
-						name: "Memory usage",
-						value: Math.round(process.memoryUsage().rss / 1000000, -1) + " MB",
-						inline: true
-					});
-				}
-
-				msg.channel.sendMessage("", {embed: {
-					color: EMBED_COLOR,
-					author: {
-						name: bot.user.username
-					},
-					thumbnail: {
-						url: "http://i.imgur.com/IERDoA4.png"
-					},
-					description: bot.user.username + " v" + version,
-					fields: fields,
-					timestamp: new Date()
-				}});
-			};
-
 			fields.push({
 				name: "Owner",
 				value: "Bramskyyy #1706",
@@ -936,8 +898,32 @@ var commands = {
 				inline: true
 			});
 
-			var pid = process.pid // you can use any valid PID instead
-			usage.lookup(pid, handleUsage);
+			if (msg.author.id == auth.ownerid) {
+				fields.push({
+					name: "CPU usage",
+					value: 'Unavailable',
+					inline: true
+				});
+
+				fields.push({
+					name: "Memory usage",
+					value: Math.round(process.memoryUsage().rss / 1000000, -1) + " MB",
+					inline: true
+				});
+			}
+
+			msg.channel.sendMessage("", {embed: {
+				color: EMBED_COLOR,
+				author: {
+					name: bot.user.username
+				},
+				thumbnail: {
+					url: "http://i.imgur.com/IERDoA4.png"
+				},
+				description: bot.user.username + " v" + version,
+				fields: fields,
+				timestamp: new Date()
+			}});
 		},
 		description: "Show stats for the bot"
 	},

@@ -1468,4 +1468,4 @@ String.prototype.unmention = function() {
 	return this.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
 }
 
-bot.login(auth.api.discord);
+bot.login(auth.api.discord.dev);

@@ -17,7 +17,7 @@ logMsg("info", "Loaded all modules");
 
 // Get all files
 var auth = require('./data/auth.json');
-var configs = require("./data/config.json");
+var config = require("./data/config.json");
 var replies = require("./data/replies.json");
 
 logMsg("info", "Loaded all files");
@@ -1400,7 +1400,7 @@ function saveData(file, callback) {
 	var object;
 	switch(file) {
 		case "./data/config.json":
-		object = configs;
+		object = config;
 		break;
 	}
 	fs.writeFile(file, JSON.stringify(object), function(err) {
@@ -1481,4 +1481,5 @@ String.prototype.unmention = function() {
 	return this.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
 }
 
-bot.login(auth.api.discord.dev);
+if (config.env == "prod") bot.login(auth.api.discord.production);
+if (config.env == "dev") bot.login(auth.api.discord.dev);

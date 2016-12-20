@@ -1290,7 +1290,7 @@ function logMsg(priority, message) {
 // Handle messages
 function messageHandler(msg) {
 	// Don't respond to yourself or other bots
-	if (msg.author.not || msg.author.id == bot.user.id) {
+	if (msg.author.bot || msg.author.id == bot.user.id) {
 		return;
 	}
 

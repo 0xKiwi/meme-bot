@@ -1159,7 +1159,17 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 	var voiceChannel = newMember.voiceChannel;
 
 	if (!voiceChannel || newMember.voiceChannelID == newMember.guild.afkChannelID || voiceChannel.userLimit != 0) {
-		userLeftVoiceChannel(newMember, oldMember.voiceChannel);
+
+		//Only actual users, no bots
+		var realUsers = oldMember.voiceChannel.members.filter(function(member) {
+			if (member.user.bot) return false;
+		});
+
+		if (realUsers.size <= 0) {
+			oldMember.voiceChannel.leave();
+		} else {
+			userLeftVoiceChannel(newMember, oldMember.voiceChannel);
+		}
 	} else {
 		userJoinedVoiceChannel(newMember, voiceChannel);
 	}

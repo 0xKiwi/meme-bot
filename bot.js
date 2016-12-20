@@ -1159,22 +1159,20 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 		return;
 	}
 
-	var voiceChannel = newMember.voiceChannel;
-
-	if (!voiceChannel || newMember.voiceChannelID == newMember.guild.afkChannelID || voiceChannel.userLimit != 0) {
+	if (!newMember.voiceChannel || newMember.voiceChannelID == newMember.guild.afkChannelID || newMember.voiceChannel.userLimit != 0) {
 
 		//Only actual users, no bots
 		var realUsers = oldMember.voiceChannel.members.filter(function(member) {
-			if (member.user.bot) return false;
+			return !member.user.bot;
 		});
 
-		if (realUsers.size <= 0) {
+		if (realUsers.size <= 1) {
 			oldMember.voiceChannel.leave();
 		} else {
 			userLeftVoiceChannel(newMember, oldMember.voiceChannel);
 		}
 	} else {
-		userJoinedVoiceChannel(newMember, voiceChannel);
+		userJoinedVoiceChannel(newMember, newMember.voiceChannel);
 	}
 });
 

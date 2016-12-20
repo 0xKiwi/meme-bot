@@ -1,6 +1,9 @@
 {
 	"api" : {
-		"discord": "",
+		"discord": {
+			"dev": "",
+			"production": ""
+		},
 		"youtube": ""
 	},
 	"ownerid": ""

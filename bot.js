@@ -1295,7 +1295,7 @@ function messageHandler(msg) {
 	if (!msg.isMentioned(bot.user)) return;
 
 	// Don't respond if there is text before the mention
-	if (!msg.content.startsWith("@" + bot.user.username)) return;
+	if (!msg.content.startsWith("<@" + bot.user.id + ">")) return;
 
 	var args = msg.content.split(' ')
 	args = args.splice(1, args.length);

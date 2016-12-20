@@ -1290,14 +1290,12 @@ function logMsg(priority, message) {
 // Handle messages
 function messageHandler(msg) {
 	// Don't respond to yourself or other bots
-	if (msg.author.bot || msg.author.id == bot.user.id) {
-		return;
-	}
-
+	if (msg.author.bot || msg.author.id == bot.user.id) return;
 	// Don't respond if we're not mentioned
-	if (!msg.isMentioned(bot.user)) {
-		return;
-	}
+	if (!msg.isMentioned(bot.user)) return;
+
+	// Don't respond if there is text before the mention
+	if (!msg.content.startsWith("@" + bot.user.username)) return;
 
 	var args = msg.content.split(' ')
 	args = args.splice(1, args.length);

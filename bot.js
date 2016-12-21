@@ -1039,9 +1039,16 @@ var commands = {
 			});
 
 			if (seen[user.id] != null && seen[user.id] != "") {
+				var time = (Date.now() - seen[msg.author.id]) / 1000 | 0;
+				if (time < 10) {
+					time = "just now";
+				} else {
+					time = secondsToHHMMSS(time);
+				}
+
 				fields.push({
 					name: "Last seen",
-					value: seen[user.id],
+					value: time,
 					inline: true
 				});
 			}
@@ -1147,7 +1154,7 @@ bot.on("message", function(msg) {
 
 bot.on("presenceUpdate", function(oldMember, newMember) {
 	if (newMember.presence.status == "offline") {
-		seen[newMember.id] = new Date().toLocaleString();
+		seen[newMember.id] = Date.now() + "";
 	}
 });
 

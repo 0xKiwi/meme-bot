@@ -1002,7 +1002,15 @@ var commands = {
 	"user": {
 		do: function(bot, msg, args) {
 			msg.channel.startTyping()
+
+			if (msg.mentions.users.size != 2) {
+				msg.reply(getReply("bad-command"));
+				msg.channel.stopTyping();
+				return;
+			}
+
 			var user = msg.mentions.users.array()[1];
+			if (user.id == bot.user.id) user = msg.mentions.users.array()[0]
 			var member = msg.guild.member(bot.users.get(user.id));
 			updateLastSeen(user);
 

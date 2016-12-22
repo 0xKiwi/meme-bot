@@ -429,17 +429,6 @@ var commands = {
 		},
 		description: "Unreal Tournament 2004 sound effect"
 	},
-	// Admiral Ackbar says "It's a trap"
-	"itsatrap": {
-		do: function(bot, msg, args) {
-			var voiceChannel = msg.member.voiceChannel;
-			if (!voiceChannel) {
-				return msg.reply("you must be in a voice channel first.");
-			}
-			playFileInVoiceChannel(voiceChannel, "sound/its-a-trap.mp3");
-		},
-		description: "Admiral Ackbar says \"It's a trap\""
-	},
 	// Sound effect from Unreal Tournament 2004
 	"invulnerable": {
 		do: function(bot, msg, args) {
@@ -450,6 +439,17 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/invulnerable.mp3");
 		},
 		description: "Unreal Tournament 2004 sound effect"
+	},
+	// Admiral Ackbar says "It's a trap"
+	"itsatrap": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/its-a-trap.mp3");
+		},
+		description: "Admiral Ackbar says \"It's a trap\""
 	},
 	// Sound effect: My name is jeff
 	"jeff": {
@@ -492,6 +492,13 @@ var commands = {
 		},
 		description: "Just do it!"
 	},
+	// Leaves the voice channel
+	"leave": {
+		do: function(bot, msg, args) {
+			msg.channel.guild.voiceConnection.disconnect();
+		},
+		description: "Leaves a voice channel"
+	},
 	// Sound effect: Leeroy Jenkins!
 	"leeroy": {
 		do: function(bot, msg, args) {
@@ -502,13 +509,6 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/leeroy-jenkins.mp3");
 		},
 		description: "Plays the sound effect: Leeroy Jenkins!"
-	},
-	// Leaves the voice channel
-	"leave": {
-		do: function(bot, msg, args) {
-			msg.channel.guild.voiceConnection.disconnect();
-		},
-		description: "Leaves a voice channel"
 	},
 	// Palpatine saying "Let the hate flow through you"
 	"letthehate": {

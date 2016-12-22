@@ -216,6 +216,17 @@ var commands = {
 		},
 		description: "Plays the sound effect: I have crippling depression"
 	},
+	// Palpatine saying do it
+	"doit": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/do-it.mp3");
+		},
+		description: "Palpatine saying do it"
+	},
 	// Sound effect from Unreal Tournament 2004
 	"dominating": {
 		do: function(bot, msg, args) {
@@ -418,6 +429,16 @@ var commands = {
 		},
 		description: "Unreal Tournament 2004 sound effect"
 	},
+	"itsatrap": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/its-a-trap.mp3");
+		},
+		description: "Admiral Akbar says \"It's a trap\""
+	},
 	// Sound effect from Unreal Tournament 2004
 	"invulnerable": {
 		do: function(bot, msg, args) {
@@ -487,6 +508,17 @@ var commands = {
 			msg.channel.guild.voiceConnection.disconnect();
 		},
 		description: "Leaves a voice channel"
+	},
+	// Palpatine saying "Let the hate flow through you"
+	"letthehate": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/let-the-hate-flow-through-you.mp3");
+		},
+		description: "Palpatine saying \"Let the hate flow through you\""
 	},
 	// Is only a game, why you heff to be mad
 	"mad": {
@@ -998,6 +1030,17 @@ var commands = {
 		},
 		description: "Unbind the bot from any channel"
 	},
+	// Palpatine saying "Unlimited poweeeeeeer"
+	"unlimitedpower": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/unlimited-power.mp3");
+		},
+		description: "Palpatine saying \"Unlimited poweeeeeeer\""
+	},
 	// Show info about a user
 	"user": {
 		do: function(bot, msg, args) {
@@ -1118,6 +1161,17 @@ var commands = {
 		},
 		description: "Plays the sound effect: GTA V Wasted"
 	},
+	// Ned Stark says "Winter is coming"
+	"winteriscoming": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/winter-is-coming.mp3");
+		},
+		description: "Ned Stark says \"Winter is coming\""
+	}
 };
 
 // Init bot and modules

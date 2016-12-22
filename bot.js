@@ -429,6 +429,7 @@ var commands = {
 		},
 		description: "Unreal Tournament 2004 sound effect"
 	},
+	// Admiral Ackbar says "It's a trap"
 	"itsatrap": {
 		do: function(bot, msg, args) {
 			var voiceChannel = msg.member.voiceChannel;
@@ -437,7 +438,7 @@ var commands = {
 			}
 			playFileInVoiceChannel(voiceChannel, "sound/its-a-trap.mp3");
 		},
-		description: "Admiral Akbar says \"It's a trap\""
+		description: "Admiral Ackbar says \"It's a trap\""
 	},
 	// Sound effect from Unreal Tournament 2004
 	"invulnerable": {

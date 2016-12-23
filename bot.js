@@ -1231,14 +1231,17 @@ bot.on('voiceStateUpdate', function(oldMember, newMember) {
 
 	if (!newMember.voiceChannel || newMember.voiceChannelID == newMember.guild.afkChannelID || newMember.voiceChannel.userLimit != 0) {
 
+		var realUsers;
 		//Only actual users, no bots
-		var realUsers = oldMember.voiceChannel.members.filter(function(member) {
-			return !member.user.bot;
-		});
+		if (oldMember.voiceChannel) {
+			realUsers = oldMember.voiceChannel.members.filter(function(member) {
+				return !member.user.bot;
+			});
+		}
 
-		if (realUsers.size <= 1) {
+		if (realUsers != null && realUsers.size <= 0) {
 			oldMember.voiceChannel.leave();
-		} else {
+		} else if (oldMember.voiceChannel != null) {
 			userLeftVoiceChannel(newMember, oldMember.voiceChannel);
 		}
 	} else {

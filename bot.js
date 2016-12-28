@@ -11,7 +11,7 @@ const YouTube = require('youtube-node');
 const ytdl = require("ytdl-core");
 const googleTTS = require('google-tts-api');
 const omdb = require('omdb');
-require("write-file-atomic");
+const writeFileAtomic = require("write-file-atomic");
 
 logMsg("info", "Loaded all modules");
 

@@ -13,6 +13,7 @@ const googleTTS = require('google-tts-api');
 const omdb = require('omdb');
 const writeFileAtomic = require("write-file-atomic");
 const prettyMs = require('pretty-ms');
+const dateFormat = require('dateformat');
 
 logMsg("info", "Loaded all modules");
 
@@ -28,6 +29,7 @@ const VERSION = "0.1.0";
 const BOT_STATUS_UPDATE_DELAY = 30000;
 const MAX_TTS_LENGTH = 140;
 const EMBED_COLOR = 12697012;
+const DEFAULT_DATE_FORMAT = "dd/mm/yyyy HH:MM:ss";
 
 var queues = {};
 var voice = {};
@@ -1103,9 +1105,10 @@ var commands = {
 				value: rolesString.slice(0, -2)
 			});
 
+			var joined = dateFormat(user.createdAt, DEFAULT_DATE_FORMAT);
 			fields.push({
 				name: "Joined Discord",
-				value: user.createdAt.toLocaleString(),
+				value: joined,
 				inline: true
 			});
 

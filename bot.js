@@ -29,15 +29,16 @@ logMsg("info", "Loaded all files");
 const VERSION = "0.1.0";
 const BOT_STATUS_UPDATE_DELAY = 30000;
 const MAX_TTS_LENGTH = 140;
-const EMBED_COLOR = 12697012;
 const DEFAULT_DATE_FORMAT = "dd/mm/yyyy HH:MM:ss";
 const THUMBNAIL_EMPTY = "http://i.imgur.com/e6oOklE.png";
 const THUMBNAIL_BOT = "http://i.imgur.com/UKPmJU4.png";
 const COLORS = {
-	online: 0x43B581,
-	idle: 0xFAA61A,
-	dnd: 0xF04747,
-	offline: 0x747F8D
+	green: 0x43B581,
+	orange: 0xFAA61A,
+	red: 0xF04747,
+	swanson: 0xAB8471,
+	default: 0xC1BDB4,
+	gray: 0x747F8D
 };
 
 var queues = {};
@@ -62,7 +63,7 @@ var commands = {
 	"add": {
 		do: function(bot, msg, args) {
 			msg.channel.sendMessage("", {embed: {
-				color: EMBED_COLOR,
+				color: getColor("default"),
 				author: {
 					name: "Click to add Potato to your server!",
 					icon_url: bot.user.avatarURL,
@@ -129,7 +130,7 @@ var commands = {
 						imageResponse.on('data', function(imageChunk) {
 							var image = JSON.parse(imageChunk).file;
 							msg.channel.sendMessage("", {embed: {
-								color: 14920496,
+								color: getColor("orange"),
 								author: {
 									name: "Cat Facts™",
 									icon_url: "http://icons.iconarchive.com/icons/paomedia/small-n-flat/256/cat-icon.png",
@@ -276,7 +277,7 @@ var commands = {
 				output = eval(js);
 				var endTime = now();
 				msg.channel.sendMessage("", {embed: {
-					color: 0x0CCA4A,
+					color: getColor("green"),
 					author: {
 						icon_url: bot.user.avatarURL,
 						name: "Output"
@@ -291,7 +292,7 @@ var commands = {
 				output = e;
 				var endTime = now();
 				msg.channel.sendMessage("", {embed: {
-					color: 0xDB3A34,
+					color: getColor("red"),
 					author: {
 						icon_url: bot.user.avatarURL,
 						name: "Output"
@@ -328,23 +329,16 @@ var commands = {
 			var callback = function(response) {
 				response.setEncoding('utf8');
 				response.on('data', function(chunk) {
-					var last_message = JSON.parse(chunk);
+					let last_message = JSON.parse(chunk);
+					let timestamp = new Date(last_message.created_on);
 
-					var timestamp = new Date(last_message.created_on);
-
-					var statusColor = 0xDB3A34;
-					var iconURL = "https://status.github.com/images/status-icon-red.png";
-
-					if (last_message.status == "good") {
-						statusColor = 0x0CCA4A;
-						iconURL = "https://status.github.com/images/status-icon-green.png";
-					} else if (last_message.status == "minor") {
-						statusColor = 0xF29D50;
-						iconURL = "https://status.github.com/images/status-icon-orange.png";
-					}
+					let color = "red";
+					if (last_message.status == "good") color = "green"
+					else if (last_message.status == "minor") color = "orange"
+					else if (last_message.status == "major") color = "red"
 
 					msg.channel.sendMessage("", {embed: {
-						color: statusColor,
+						color: getColor(color),
 						author: {
 							name: "GitHub Status",
 							url: "https://status.github.com/"
@@ -352,7 +346,7 @@ var commands = {
 						description: last_message.body,
 						timestamp: timestamp,
 						footer: {
-							icon_url: iconURL,
+							icon_url: "https://status.github.com/images/status-icon-" + color + ".png",
 							text: 'Last update on'
 						}
 					}});
@@ -360,8 +354,6 @@ var commands = {
 			};
 
 			var req = https.request(options, callback).end();
-
-
 		},
 		description: "Get GitHub status"
 	},
@@ -644,7 +636,7 @@ var commands = {
 					}
 
 					msg.channel.sendMessage("", {embed: {
-						color: EMBED_COLOR,
+						color: getColor("default"),
 						author: {
 							name: displayTitle,
 							icon_url: movie.poster,
@@ -882,7 +874,7 @@ var commands = {
 			});
 
 			msg.channel.sendMessage("", {embed: {
-				color: EMBED_COLOR,
+				color: getColor(),
 				author: {
 					name: guild.name
 				},
@@ -958,7 +950,7 @@ var commands = {
 			}
 
 			msg.channel.sendMessage("", {embed: {
-				color: EMBED_COLOR,
+				color: getColor("default"),
 				author: {
 					name: bot.user.username
 				},
@@ -1021,7 +1013,7 @@ var commands = {
 					var quote = JSON.parse(chunk)[0].toString();
 
 					msg.channel.sendMessage("", {embed: {
-						color: 11240561,
+						color: getColor("swanson"),
 						author: {
 							name: "Ron Swanson",
 							icon_url: "http://i.imgur.com/VTMQFUG.png",
@@ -1163,7 +1155,7 @@ var commands = {
 			});
 
 			msg.channel.sendMessage("", {embed: {
-				color: COLORS[member.presence.status],
+				color: getColor(member.presence.status),
 				author: {
 					name: user.username,
 					icon_url: user.displayAvatarURL
@@ -1367,6 +1359,40 @@ function downloadTTS(url, dest) {
 		})
 		.end();
 	});
+}
+
+// Get a color
+function getColor(description) {
+	switch (description) {
+		case "green":
+			return COLORS.green;
+		case "online":
+			return COLORS.green;
+		case "good":
+			return COLORS.green;
+		case "orange":
+			return COLORS.orange;
+		case "idle":
+			return COLORS.orange;
+		case "minor":
+			return COLORS.orange;
+		case "red":
+			return COLORS.red;
+		case "dnd":
+			return COLORS.red;
+		case "major":
+			return COLORS.red;
+		case "swanson":
+			return COLORS.swanson;
+		case "default":
+			return COLORS.embed_default;
+		case "gray":
+			return COLORS.gray;
+		case "offline":
+			return COLORS.gray;
+		default:
+			return COLORS.embed_default;
+	}
 }
 
 // Get the number of online users

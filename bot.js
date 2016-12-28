@@ -12,6 +12,7 @@ const ytdl = require("ytdl-core");
 const googleTTS = require('google-tts-api');
 const omdb = require('omdb');
 const writeFileAtomic = require("write-file-atomic");
+const prettyMs = require('pretty-ms');
 
 logMsg("info", "Loaded all modules");
 
@@ -915,7 +916,7 @@ var commands = {
 
 			fields.push({
 				name: "Uptime",
-				value: secondsToHHMMSS(Math.round(bot.uptime / 1000)),
+				value: prettyMs(bot.uptime, { secDecimalDigits: 0 }),
 				inline: true
 			});
 

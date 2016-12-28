@@ -23,6 +23,7 @@
     "omdb": "^0.7.0",
     "opusscript": "0.0.1",
     "performance-now": "^0.2.0",
+    "pretty-ms": "^2.1.0",
     "usage": "^0.7.1",
     "uws": "0.12.0",
     "write-file-atomic": "^1.2.0",

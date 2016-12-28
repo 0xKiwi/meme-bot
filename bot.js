@@ -14,6 +14,7 @@ const omdb = require('omdb');
 const writeFileAtomic = require("write-file-atomic");
 const prettyMs = require('pretty-ms');
 const dateFormat = require('dateformat');
+const ago = require('s-ago');
 
 logMsg("info", "Loaded all modules");
 
@@ -30,6 +31,14 @@ const BOT_STATUS_UPDATE_DELAY = 30000;
 const MAX_TTS_LENGTH = 140;
 const EMBED_COLOR = 12697012;
 const DEFAULT_DATE_FORMAT = "dd/mm/yyyy HH:MM:ss";
+const THUMBNAIL_EMPTY = "http://i.imgur.com/e6oOklE.png";
+const THUMBNAIL_BOT = "http://i.imgur.com/UKPmJU4.png";
+const COLORS = {
+	online: 0x43B581,
+	idle: 0xFAA61A,
+	dnd: 0xF04747,
+	offline: 0x747F8D
+};
 
 var queues = {};
 var voice = {};
@@ -1066,24 +1075,19 @@ var commands = {
 	// Show info about a user
 	"user": {
 		do: function(bot, msg, args) {
-			msg.channel.startTyping();
 
-			if (msg.mentions.users.size != 2) {
-				msg.reply(getReply("bad-command"));
-				msg.channel.stopTyping();
+			let user = getUserFromMention(args[1]);
+			if (user == null) {
+				msg.reply("user not found.");
 				return;
 			}
+			let member = msg.guild.member(bot.users.get(user.id));
 
-			var user = msg.mentions.users.array()[1];
-			if (user.id == bot.user.id) user = msg.mentions.users.array()[0]
-			var member = msg.guild.member(bot.users.get(user.id));
-			updateLastSeen(user);
-
-			var fields = [];
+			let fields = [];
 
 			fields.push({
-				name: "ID",
-				value: user.id,
+				name: "Display Name",
+				value: member.displayName,
 				inline: true
 			});
 
@@ -1093,65 +1097,82 @@ var commands = {
 				inline: true
 			});
 
-			var roles = member.roles.array();
-			var rolesString = "";
-
-			for (var i = 0; i < roles.length; i++) {
-				rolesString += roles[i].name.unmention() + ", ";
+			updateLastSeen(user);
+			let lastSeen;
+			if (seen[user.id] != null && seen[user.id] != "") {
+				lastSeen = ago(new Date(parseInt(seen[user.id])));
+			} else {
+				lastSeen = "never";
 			}
 
+			let status = "Unknown";
+			if (member.presence.status == "online") status = "Online"
+			else if (member.presence.status == "offline") status = "Offline"
+			else if (member.presence.status == "idle") status = "Idle"
+			else if (member.presence.status == "dnd") status = "Do not Disturb"
+
 			fields.push({
-				name: "Roles",
-				value: rolesString.slice(0, -2)
+				name: "Status",
+				value: status,
+				inline: true
 			});
 
-			var joined = dateFormat(user.createdAt, DEFAULT_DATE_FORMAT);
+			if (member.presence.status == "offline") {
+				fields.push({
+					name: "Last seen",
+					value: lastSeen,
+					inline: true
+				});
+			} else {
+				fields.push({
+					name: "Playing",
+					value: user.presence.game ? user.presence.game.name : "/",
+					inline: true
+				});
+			}
+
+			let joined = dateFormat(user.createdAt, DEFAULT_DATE_FORMAT);
 			fields.push({
 				name: "Joined Discord",
 				value: joined,
 				inline: true
 			});
-
-			var lastSeen;
-			if (seen[user.id] != null && seen[user.id] != "") {
-				var time = Date.now() - seen[user.id];
-				if (time < 10) {
-					lastSeen = "just now";
-				} else {
-					lastSeen = prettyMs(time, { secDecimalDigits: 0 }) + " ago";
-				}
-			} else {
-				lastSeen = "never";
-			}
+			// Empty field
+			fields.push({
+				name: String.fromCharCode(8203),
+				value: String.fromCharCode(8203)
+			});
 
 			fields.push({
-				name: "Last seen",
-				value: lastSeen,
+				name: "ID",
+				value: user.id,
 				inline: true
 			});
 
-			if (user.presence.game) {
-				fields.push({
-					name: "Playing",
-					value: user.presence.game.name
-				});
+			let roles = member.roles.array();
+			let rolesString = "";
+
+			for (let i = 0; i < roles.length; i++) {
+				rolesString += roles[i].name.unmention() + ", ";
 			}
 
+			fields.push({
+				name: "Roles",
+				value: rolesString.slice(0, -2),
+				inline: true
+			});
+
 			msg.channel.sendMessage("", {embed: {
-				color: EMBED_COLOR,
+				color: COLORS[member.presence.status],
 				author: {
 					name: user.username,
 					icon_url: user.displayAvatarURL
 				},
 				thumbnail: {
-					url: user.displayAvatarURL
+					url: user.bot ? THUMBNAIL_BOT : THUMBNAIL_EMPTY
 				},
 				fields: fields
-			}})
-			.then(function() {
-				msg.channel.stopTyping();
-			});
-			msg.channel.stopTyping();
+			}});
 		},
 		description: "Show info about a user"
 	},
@@ -1375,6 +1396,15 @@ function getQueueMessage(msg) {
 function getReply(type) {
 	var rs = replies[type];
 	return rs[parseInt(Math.random() * rs.length)];
+}
+
+// Get user from mention
+function getUserFromMention(mention) {
+	let regex = /\d+/;
+	let id = "" + mention.match(regex);
+	let user = bot.users.get(id);
+	if (user === undefined) return null;
+	return user;
 }
 
 // Logs a message to the console

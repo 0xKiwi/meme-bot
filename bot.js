@@ -1064,7 +1064,7 @@ var commands = {
 	// Show info about a user
 	"user": {
 		do: function(bot, msg, args) {
-			msg.channel.startTyping()
+			msg.channel.startTyping();
 
 			if (msg.mentions.users.size != 2) {
 				msg.reply(getReply("bad-command"));
@@ -1109,20 +1109,23 @@ var commands = {
 				inline: true
 			});
 
+			var lastSeen;
 			if (seen[user.id] != null && seen[user.id] != "") {
-				var time = (Date.now() - seen[msg.author.id]) / 1000 | 0;
+				var time = Date.now() - seen[user.id];
 				if (time < 10) {
-					time = "just now";
+					lastSeen = "just now";
 				} else {
-					time = secondsToHHMMSS(time);
+					lastSeen = prettyMs(time, { secDecimalDigits: 0 }) + " ago";
 				}
-
-				fields.push({
-					name: "Last seen",
-					value: time,
-					inline: true
-				});
+			} else {
+				lastSeen = "never";
 			}
+
+			fields.push({
+				name: "Last seen",
+				value: lastSeen,
+				inline: true
+			});
 
 			if (user.presence.game) {
 				fields.push({
@@ -1135,10 +1138,10 @@ var commands = {
 				color: EMBED_COLOR,
 				author: {
 					name: user.username,
-					icon_url: user.avatarURL
+					icon_url: user.displayAvatarURL
 				},
 				thumbnail: {
-					url: user.avatarURL
+					url: user.displayAvatarURL
 				},
 				fields: fields
 			}})
@@ -1547,7 +1550,7 @@ function tts(text, voiceChannel) {
 // Update last seen time
 function updateLastSeen(user) {
 	if (user.presence.status != "offline") {
-		seen[user.id] = new Date().toLocaleString();
+		seen[user.id] = Date.now();
 	}
 }
 

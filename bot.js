@@ -24,7 +24,7 @@ var replies = require("./data/replies.json");
 logMsg("info", "Loaded all files");
 
 // Vars
-var version = "0.1.0";
+const VERSION = "0.1.0";
 const BOT_STATUS_UPDATE_DELAY = 30000;
 const MAX_TTS_LENGTH = 140;
 const EMBED_COLOR = 12697012;
@@ -954,7 +954,7 @@ var commands = {
 				thumbnail: {
 					url: "http://i.imgur.com/IERDoA4.png"
 				},
-				description: bot.user.username + " v" + version,
+				description: bot.user.username + " v" + VERSION,
 				fields: fields,
 				timestamp: new Date()
 			}});
@@ -1203,7 +1203,7 @@ var youtube = new YouTube();
 youtube.setKey(auth.api.youtube);
 
 bot.on("ready", function() {
-	logMsg("info", "Started " + bot.user.username + " v" + version);
+	logMsg("info", "Started " + bot.user.username + " v" + VERSION);
 
 	setInterval(function() {
 		var game = getReply("game");

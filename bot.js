@@ -961,6 +961,24 @@ var commands = {
 		},
 		description: "Show stats for the bot"
 	},
+	// Stops the bot
+	"stop": {
+		do: function(bot, msg, args) {
+			if (msg.author.id !== auth.ownerid) {
+				msg.reply(getReply("bad-access-level"));
+				return;
+			};
+
+			bot.destroy()
+				.then(function() {
+					process.exit();
+				})
+				.catch(function() {
+					process.exit();
+				});
+		},
+		description: "Stops the bot"
+	},
 	// Alias for join
 	"summon": {
 		do: function(bot, msg, args) {

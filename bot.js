@@ -972,13 +972,8 @@ var commands = {
 				return;
 			};
 
-			bot.destroy()
-				.then(function() {
-					process.exit();
-				})
-				.catch(function() {
-					process.exit();
-				});
+			bot.user.setStatus('invisible');
+			bot.destroy();
 		},
 		description: "Stops the bot"
 	},

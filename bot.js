@@ -1594,12 +1594,14 @@ function updateLastSeen(user) {
 
 // Do stuff when user joins a voice channel
 function userJoinedVoiceChannel(newMember, voiceChannel) {
-	tts(newMember.user.username + ' joined the channel', voiceChannel);
+	var displayname = newMember.nickname || newMember.user.username;
+	tts(displayname + ' joined the channel', voiceChannel);
 }
 
 // Do stuff when user leaves a voice channel
 function userLeftVoiceChannel(newMember, voiceChannel) {
-	tts(newMember.user.username + ' left the channel', voiceChannel);
+	var displayname = newMember.nickname || newMember.user.username;
+	tts(displayname + ' left the channel', voiceChannel);
 }
 
 String.prototype.capitalizeFirstLetter = function() {

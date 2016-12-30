@@ -17,7 +17,7 @@
   "dependencies": {
     "date-util": "^1.2.1",
     "dateformat": "^2.0.0",
-    "discord.js": "github:hydrabolt/discord.js#indev",
+    "discord.js": "^11.0.0",
     "erlpack": "github:hammerandchisel/erlpack#master",
     "google-tts-api": "0.0.1",
     "node-opus": "^0.2.2",

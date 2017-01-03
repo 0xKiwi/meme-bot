@@ -913,7 +913,7 @@ var commands = {
 
 			fields.push({
 				name: "Owner",
-				value: "Bramskyyy #1706",
+				value: bot.users.get(auth.ownerid).username +  " #" + bot.users.get(auth.ownerid).discriminator,
 				inline: true
 			});
 

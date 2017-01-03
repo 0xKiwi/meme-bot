@@ -935,19 +935,29 @@ var commands = {
 				inline: true
 			});
 
-			if (msg.author.id == auth.ownerid) {
-				fields.push({
-					name: "CPU usage",
-					value: 'Unavailable',
-					inline: true
-				});
+			fields.push({
+				name: "CPU usage",
+				value: 'Unavailable',
+				inline: true
+			});
 
-				fields.push({
-					name: "Memory usage",
-					value: Math.round(process.memoryUsage().rss / 1000000, -1) + " MB",
-					inline: true
-				});
-			}
+			fields.push({
+				name: "Memory usage",
+				value: Math.round(process.memoryUsage().rss / 1000000, -1) + " MB",
+				inline: true
+			});
+
+			fields.push({
+				name: "Node",
+				value: process.version,
+				inline: true
+			});
+
+			fields.push({
+				name: "Discord.js",
+				value: "v" + Discord.version,
+				inline: true
+			});
 
 			msg.channel.sendMessage("", {embed: {
 				color: getColor("default"),

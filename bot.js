@@ -1215,6 +1215,17 @@ var commands = {
 			playFileInVoiceChannel(voiceChannel, "sound/winter-is-coming.mp3");
 		},
 		description: "Ned Stark says \"Winter is coming\""
+	},
+	// The legendary Eddy Wally says "Wow"
+	"wow": {
+		do: function(bot, msg, args) {
+			var voiceChannel = msg.member.voiceChannel;
+			if (!voiceChannel) {
+				return msg.reply("you must be in a voice channel first.");
+			}
+			playFileInVoiceChannel(voiceChannel, "sound/wow.mp3");
+		},
+		description: "The legendary Eddy Wally says \"Wow\""
 	}
 };
 
